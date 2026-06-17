@@ -1,0 +1,95 @@
+# Single command to start everything: docker compose up --build
+# On a new PC: copy .env.example → .env, fill in MS credentials, then run above.
+
+services:
+
+  # ── PostgreSQL ─────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB:       ${PGDATABASE:-outlook_crm}
+      POSTGRES_USER:     ${PGUSER:-postgres}
+      POSTGRES_PASSWORD: ${PGPASSWORD:-changeme}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PGUSER:-postgres}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+
+  # ── Ollama (local LLM) ─────────────────────────────────────────────────────
+  ollama:
+    image: ollama/ollama
+    volumes:
+      - ollama_data:/root/.ollama
+    ports:
+      - "11434:11434"
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list > /dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 20s
+    restart: unless-stopped
+    # ── Uncomment below for NVIDIA GPU support ────────────────────────────────
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+  # ── Pull the Ollama model once (cached in volume on subsequent runs) ───────
+  ollama-init:
+    image: ollama/ollama
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    entrypoint: ["ollama", "pull", "${OLLAMA_MODEL:-llama3.2:3b}"]
+    restart: "no"
+
+  # ── CRM Web App ────────────────────────────────────────────────────────────
+  crm:
+    build: .
+    command: sh -c "node crm/migrate.js && exec node web-ui/server.js"
+    ports:
+      - "${WEB_UI_PORT:-3000}:3000"
+    env_file: .env
+    environment:
+      NODE_ENV:     production
+      DATABASE_URL: postgresql://${PGUSER:-postgres}:${PGPASSWORD:-changeme}@postgres:5432/${PGDATABASE:-outlook_crm}
+      OLLAMA_URL:   http://ollama:11434
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ollama-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/api/status || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    restart: unless-stopped
+
+  # ── OAuth Auth Server (for MCP tool authentication) ───────────────────────
+  auth-server:
+    build: .
+    command: node outlook-auth-server.js
+    ports:
+      - "3333:3333"
+    env_file: .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pgdata:       # PostgreSQL data — persists across restarts
+  ollama_data:  # Ollama models — persists across restarts (~2GB for llama3.2:3b)

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Keys — CRM</title>
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent: #b45309;
+      --accent-fg: #fff;
+      --bg: #f7f5f2;
+      --surface: #fff;
+      --border: #e5e2dc;
+      --text: #1c1917;
+      --text-2: #44403c;
+      --text-3: #78716c;
+      --red: #dc2626;
+      --red-bg: #fee2e2;
+      --green: #16a34a;
+      --green-bg: #dcfce7;
+      --r: 10px;
+      --font: 'Satoshi', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; }
+    .topbar {
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 0 32px; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 16px; }
+    .back-link { font-size: 13px; color: var(--text-3); text-decoration: none; }
+    .back-link:hover { color: var(--accent); }
+    .topbar h1 { font-size: 16px; font-weight: 700; }
+    .page { max-width: 720px; margin: 40px auto; padding: 0 24px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 28px; margin-bottom: 24px; }
+    .card h2 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .card p  { font-size: 13px; color: var(--text-3); line-height: 1.6; margin-bottom: 16px; }
+    .form-row { display: flex; gap: 10px; }
+    .form-row input {
+      flex: 1; padding: 9px 13px; border: 1px solid var(--border);
+      border-radius: 8px; font-size: 13px; font-family: var(--font); outline: none;
+    }
+    .form-row input:focus { border-color: var(--accent); }
+    .btn {
+      padding: 9px 18px; border: none; border-radius: 8px; font-size: 13px;
+      font-family: var(--font); font-weight: 600; cursor: pointer;
+    }
+    .btn-primary { background: var(--accent); color: var(--accent-fg); }
+    .btn-primary:hover { opacity: .9; }
+    .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text-2); }
+    .btn-ghost:hover { border-color: var(--red); color: var(--red); }
+    .btn-danger { background: var(--red-bg); color: var(--red); border: none; }
+    .btn-danger:hover { background: #fca5a5; }
+    .key-list { display: flex; flex-direction: column; gap: 10px; }
+    .key-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px; border: 1px solid var(--border); border-radius: 8px;
+      background: var(--bg);
+    }
+    .key-row.revoked { opacity: .5; }
+    .key-info { display: flex; flex-direction: column; gap: 3px; }
+    .key-name { font-size: 14px; font-weight: 600; }
+    .key-meta { font-size: 11.5px; color: var(--text-3); }
+    .key-badge {
+      font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px;
+      text-transform: uppercase; letter-spacing: .05em;
+    }
+    .key-badge.active { background: var(--green-bg); color: var(--green); }
+    .key-badge.revoked { background: #f3f4f6; color: #9ca3af; }
+    /* new-key reveal banner */
+    .new-key-banner {
+      background: #fefce8; border: 1px solid #fde68a; border-radius: 8px;
+      padding: 16px; margin-bottom: 24px; display: none;
+    }
+    .new-key-banner.show { display: block; }
+    .new-key-banner h3 { font-size: 13px; font-weight: 700; color: #92400e; margin-bottom: 8px; }
+    .new-key-banner p  { font-size: 12.5px; color: #78350f; margin-bottom: 10px; }
+    .key-value {
+      font-family: 'Courier New', monospace; font-size: 13px;
+      background: #fff; border: 1px solid #fde68a; border-radius: 6px;
+      padding: 10px 14px; word-break: break-all; user-select: all;
+      cursor: text; margin-bottom: 10px;
+    }
+    /* Docs */
+    .docs-block { background: #1c1917; color: #e7e5e4; border-radius: 8px; padding: 16px 20px; overflow-x: auto; }
+    .docs-block pre { font-size: 12.5px; line-height: 1.7; white-space: pre-wrap; }
+    .docs-section { margin-bottom: 20px; }
+    .docs-section h3 { font-size: 13px; font-weight: 700; color: var(--text-2); margin-bottom: 8px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; padding: 8px 10px; background: var(--bg); font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--text-3); }
+    td { padding: 10px; border-top: 1px solid var(--border); vertical-align: top; }
+    td:first-child { font-family: monospace; font-size: 12px; color: var(--accent); white-space: nowrap; }
+    td code { font-family: monospace; font-size: 11.5px; background: var(--bg); padding: 1px 5px; border-radius: 4px; }
+    .method { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-right: 4px; }
+    .GET    { background: #dbeafe; color: #1d4ed8; }
+    .POST   { background: #dcfce7; color: #166534; }
+    .PATCH  { background: #fef9c3; color: #854d0e; }
+    .DELETE { background: #fee2e2; color: #991b1b; }
+    #status { font-size: 13px; color: var(--text-3); margin-top: 8px; min-height: 18px; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <a class="back-link" href="/crm.html">← Back to CRM</a>
+    <h1>API Keys</h1>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- New key reveal -->
+  <div class="new-key-banner" id="new-key-banner">
+    <h3>Copy your API key now — it won't be shown again</h3>
+    <p>Store it securely (e.g. in your app's environment variables). If you lose it, revoke this key and create a new one.</p>
+    <div class="key-value" id="new-key-value"></div>
+    <button class="btn btn-ghost" onclick="copyKey()">Copy to clipboard</button>
+  </div>
+
+  <!-- Create new key -->
+  <div class="card">
+    <h2>Generate a new API key</h2>
+    <p>Each key is tied to your account. Name it after the app that will use it.</p>
+    <div class="form-row">
+      <input id="key-name" type="text" placeholder="e.g. My CRM App, Zapier, n8n" maxlength="100" />
+      <button class="btn btn-primary" onclick="createKey()">Generate</button>
+    </div>
+    <div id="status"></div>
+  </div>
+
+  <!-- Existing keys -->
+  <div class="card">
+    <h2>Your API keys</h2>
+    <p>Revoke a key immediately if it's compromised. Revoked keys cannot be re-activated.</p>
+    <div class="key-list" id="key-list">
+      <p style="color:var(--text-3);font-size:13px">Loading…</p>
+    </div>
+  </div>
+
+  <!-- Quick-start docs -->
+  <div class="card">
+    <h2>Quick-start</h2>
+    <p>Base URL: <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px">http://localhost:3000/v1</code></p>
+
+    <div class="docs-section">
+      <h3>Authentication</h3>
+      <div class="docs-block"><pre>curl http://localhost:3000/v1/customers \
+  -H "Authorization: Bearer crm_live_YOUR_KEY"
+
+# or
+curl http://localhost:3000/v1/customers \
+  -H "X-API-Key: crm_live_YOUR_KEY"</pre></div>
+    </div>
+
+    <div class="docs-section">
+      <h3>Response format</h3>
+      <div class="docs-block"><pre>// Success
+{ "data": { ... }, "meta": { "timestamp": "...", "version": "v1", "requestId": "..." } }
+
+// Error
+{ "error": { "code": "NOT_FOUND", "message": "Customer not found" }, "meta": { ... } }</pre></div>
+    </div>
+
+    <div class="docs-section">
+      <h3>All endpoints</h3>
+      <table>
+        <thead><tr><th>Method + Path</th><th>Description</th></tr></thead>
+        <tbody id="endpoint-table"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const ENDPOINTS = [
+  ['GET',    '/v1/customers',                       'List all CRM customers'],
+  ['POST',   '/v1/customers',                       'Create / update customer — body: { email*, name, company, phone }'],
+  ['GET',    '/v1/customers/:email',                'Get one customer with full history'],
+  ['PATCH',  '/v1/customers/:email',                'Update fields — body: { name, company, phone, aiSummary }'],
+  ['DELETE', '/v1/customers/:email',                'Delete customer'],
+  ['GET',    '/v1/customers/:email/emails',         'List emails for customer'],
+  ['POST',   '/v1/customers/:email/emails/send',    'Send outbound email — body: { subject*, body*, cc, followUpDays }'],
+  ['POST',   '/v1/customers/:email/emails/inbound', 'Record inbound email + trigger AI draft — body: { subject*, body, date, outlookId, generateDraft }'],
+  ['GET',    '/v1/drafts',                          'List AI drafts — ?status=pending|sent|generating'],
+  ['GET',    '/v1/drafts/:id',                      'Get one draft'],
+  ['PATCH',  '/v1/drafts/:id',                      'Edit draft — body: { body, status }'],
+  ['POST',   '/v1/drafts/:id/send',                 'Approve & send draft — body: { body } (optional override)'],
+  ['GET',    '/v1/customers/:email/notes',          'List notes'],
+  ['POST',   '/v1/customers/:email/notes',          'Add note — body: { text* }'],
+  ['GET',    '/v1/customers/:email/quotations',     'List quotations'],
+  ['POST',   '/v1/customers/:email/quotations',     'Create quotation — body: { reference*, description, amount, currency, validUntil }'],
+  ['GET',    '/v1/follow-ups',                      'List follow-ups — ?status=pending|done'],
+  ['POST',   '/v1/customers/:email/follow-ups',     'Schedule follow-up — body: { subject, note, daysFromNow }'],
+  ['PATCH',  '/v1/follow-ups/:id',                  'Update status — body: { status: pending|done|dismissed }'],
+  ['POST',   '/v1/sync',                            'Trigger immediate Outlook sync'],
+  ['GET',    '/v1/stream',                          'SSE stream — receive real-time sync events'],
+];
+
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+async function loadKeys() {
+  const res = await fetch('/api/crm/api-keys');
+  if (res.status === 401) { location.replace('/crm-login.html'); return; }
+  const keys = await res.json();
+  const list = document.getElementById('key-list');
+  if (!keys.length) {
+    list.innerHTML = '<p style="color:var(--text-3);font-size:13px">No API keys yet. Generate one above.</p>';
+    return;
+  }
+  list.innerHTML = keys.map(k => `
+    <div class="key-row ${k.revoked ? 'revoked' : ''}" id="key-row-${k.id}">
+      <div class="key-info">
+        <span class="key-name">${esc(k.name)}</span>
+        <span class="key-meta">
+          Created ${new Date(k.created_at).toLocaleDateString()}
+          ${k.last_used_at ? ' · Last used ' + new Date(k.last_used_at).toLocaleDateString() : ' · Never used'}
+        </span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="key-badge ${k.revoked ? 'revoked' : 'active'}">${k.revoked ? 'Revoked' : 'Active'}</span>
+        ${!k.revoked ? `<button class="btn btn-danger" onclick="revokeKey(${k.id})">Revoke</button>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+async function createKey() {
+  const name = document.getElementById('key-name').value.trim() || 'My App';
+  const status = document.getElementById('status');
+  status.textContent = 'Generating…';
+  try {
+    const res  = await fetch('/api/crm/api-keys', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ name }) });
+    const data = await res.json();
+    if (!res.ok) { status.textContent = 'Error: ' + data.error; return; }
+    status.textContent = '';
+    document.getElementById('key-name').value = '';
+    // Show key reveal banner
+    document.getElementById('new-key-value').textContent = data.key;
+    document.getElementById('new-key-banner').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    await loadKeys();
+  } catch (e) { status.textContent = 'Error: ' + e.message; }
+}
+
+async function revokeKey(id) {
+  if (!confirm('Revoke this API key? Any app using it will immediately lose access.')) return;
+  const res = await fetch(`/api/crm/api-keys/${id}`, { method: 'DELETE' });
+  if (res.ok) await loadKeys();
+  else alert('Failed to revoke key');
+}
+
+function copyKey() {
+  const val = document.getElementById('new-key-value').textContent;
+  navigator.clipboard.writeText(val).then(() => {
+    const btn = event.target;
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy to clipboard', 2000);
+  });
+}
+
+// Build endpoint table
+const tbody = document.getElementById('endpoint-table');
+tbody.innerHTML = ENDPOINTS.map(([m, path, desc]) =>
+  `<tr><td><span class="method ${m}">${m}</span>${esc(path)}</td><td>${esc(desc)}</td></tr>`
+).join('');
+
+loadKeys();
+</script>
+</body>
+</html>

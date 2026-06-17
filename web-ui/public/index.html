@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M365 Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #212121;
+  --sb:      #181818;
+  --s1:      #2a2a2a;
+  --s2:      #333;
+  --bd:      #303030;
+  --bd2:     #3d3d3d;
+  --t1:      #efefef;
+  --t2:      #a0a0a0;
+  --t3:      #555;
+  --blue:    #2563eb;
+  --blue-h:  #1d4ed8;
+  --green:   #22c55e;
+  --red:     #ef4444;
+  --yellow:  #f59e0b;
+  --tool-bg: #142318;
+  --tool-bd: #1f3d27;
+  --tool-t:  #4ade80;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+body {
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--t1);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Shell ── */
+.app { display: flex; height: 100vh; }
+
+/* ── Sidebar ── */
+.sb {
+  width: 256px;
+  min-width: 256px;
+  background: var(--sb);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--bd);
+}
+
+.sb-top {
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--bd);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-icon {
+  width: 30px; height: 30px;
+  border-radius: 7px;
+  background: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.logo-icon svg { display: block; }
+.logo-name { font-size: 14px; font-weight: 600; letter-spacing: -0.02em; }
+
+.sb-body {
+  flex: 1;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+}
+.sb-body::-webkit-scrollbar { width: 3px; }
+.sb-body::-webkit-scrollbar-thumb { background: var(--bd2); border-radius: 2px; }
+
+/* Mode toggle */
+.mode-row {
+  display: flex;
+  background: var(--s1);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+  margin-bottom: 10px;
+}
+.mode-btn {
+  flex: 1; padding: 6px; border: none;
+  background: transparent; color: var(--t3);
+  border-radius: 6px; cursor: pointer;
+  font: 12.5px/1 'Inter', sans-serif;
+  font-weight: 500;
+  transition: all .12s;
+}
+.mode-btn.active {
+  background: var(--s2);
+  color: var(--t1);
+  box-shadow: 0 1px 3px rgba(0,0,0,.4);
+}
+
+/* Config section */
+.cfg { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
+.field-lbl {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--t3);
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
+.sel-wrap { position: relative; }
+.sel-wrap::after {
+  content: '';
+  position: absolute; right: 10px; top: 50%;
+  transform: translateY(-50%);
+  border: 4px solid transparent;
+  border-top: 5px solid var(--t3);
+  pointer-events: none;
+}
+select, input[type="text"] {
+  width: 100%;
+  background: var(--s1);
+  border: 1px solid var(--bd2);
+  color: var(--t1);
+  border-radius: 7px;
+  padding: 7px 28px 7px 10px;
+  font: 12.5px 'Inter', sans-serif;
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  transition: border-color .12s;
+}
+select:focus, input[type="text"]:focus { border-color: var(--blue); }
+select option { background: var(--s1); }
+.hint { font-size: 11px; color: var(--t3); margin-top: 3px; }
+.hint.ok  { color: var(--green); }
+.hint.err { color: var(--red); }
+.refresh-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: none; border: none;
+  color: var(--t3); font: 11px 'Inter', sans-serif;
+  cursor: pointer; padding: 0;
+  transition: color .1s;
+}
+.refresh-btn:hover { color: var(--t2); }
+
+/* Divider */
+.divider { border: none; border-top: 1px solid var(--bd); margin: 4px 0; }
+
+/* Nav links */
+.nav-item {
+  display: flex; align-items: center; gap: 9px;
+  padding: 7px 8px;
+  background: none; border: none;
+  color: var(--t2); font: 13px 'Inter', sans-serif;
+  cursor: pointer; border-radius: 7px;
+  text-align: left; width: 100%;
+  transition: background .1s, color .1s;
+}
+.nav-item:hover { background: var(--s1); color: var(--t1); }
+.nav-item svg { flex-shrink: 0; opacity: .6; }
+.nav-item:hover svg { opacity: 1; }
+
+/* Status bar */
+.sb-status {
+  padding: 12px 12px;
+  border-top: 1px solid var(--bd);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.status-row {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 11.5px; color: var(--t2);
+}
+.dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--bd2); flex-shrink: 0;
+}
+.dot.green  { background: var(--green); box-shadow: 0 0 4px rgba(34,197,94,.5); }
+.dot.red    { background: var(--red); }
+.dot.yellow { background: var(--yellow); }
+
+/* ── Main ── */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+
+/* Header */
+.hdr {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+  height: 52px;
+  border-bottom: 1px solid var(--bd);
+  background: var(--bg);
+  flex-shrink: 0;
+}
+.hdr-model { font-size: 14px; font-weight: 500; color: var(--t1); }
+.hdr-via   { font-size: 12px; color: var(--t3); margin-left: 8px; }
+.hdr-badge {
+  font-size: 11px; font-weight: 500;
+  color: var(--tool-t);
+  background: var(--tool-bg);
+  border: 1px solid var(--tool-bd);
+  border-radius: 5px;
+  padding: 3px 9px;
+}
+
+/* Scroll area */
+.msgs-wrap {
+  flex: 1; overflow-y: auto;
+  display: flex; flex-direction: column;
+}
+.msgs-wrap::-webkit-scrollbar { width: 4px; }
+.msgs-wrap::-webkit-scrollbar-thumb { background: var(--bd2); border-radius: 2px; }
+
+/* Messages */
+.msgs {
+  flex: 1;
+  width: 100%; max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 24px 16px;
+  display: flex; flex-direction: column; gap: 24px;
+}
+
+.msg { display: flex; gap: 12px; }
+.msg.user { flex-direction: row-reverse; }
+
+.msg-avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--s2); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600; color: var(--t2);
+  margin-top: 2px;
+}
+.msg.user .msg-avatar {
+  background: var(--blue);
+  color: #fff;
+}
+.msg-body { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.msg.user .msg-body { align-items: flex-end; }
+
+.tools-row { display: flex; flex-wrap: wrap; gap: 5px; }
+.tool-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--tool-bg);
+  border: 1px solid var(--tool-bd);
+  color: var(--tool-t);
+  padding: 2px 8px; border-radius: 4px;
+  font-size: 11px;
+  font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+}
+.chip-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--tool-t); flex-shrink: 0;
+}
+
+.bubble {
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px; line-height: 1.65;
+  white-space: pre-wrap; word-break: break-word;
+}
+.msg.user .bubble {
+  background: var(--blue);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+  max-width: 520px;
+}
+.msg.assistant .bubble {
+  background: var(--s1);
+  color: var(--t1);
+  border-bottom-left-radius: 4px;
+  max-width: 620px;
+}
+.msg-time { font-size: 10.5px; color: var(--t3); padding: 0 2px; }
+
+/* Thinking */
+.thinking-row { display: flex; gap: 12px; }
+.think-body {
+  display: flex; align-items: center; gap: 9px;
+  padding: 10px 14px;
+  background: var(--s1); border-radius: 12px; border-bottom-left-radius: 4px;
+  color: var(--t3); font-size: 13px;
+}
+.think-dots { display: flex; gap: 4px; }
+.think-dots span {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--blue);
+  animation: bounce 1.2s ease-in-out infinite;
+  opacity: .35;
+}
+.think-dots span:nth-child(2) { animation-delay: .18s; }
+.think-dots span:nth-child(3) { animation-delay: .36s; }
+@keyframes bounce {
+  0%,60%,100% { transform: translateY(0); opacity: .35; }
+  30%          { transform: translateY(-5px); opacity: 1; }
+}
+
+/* ── Empty / Welcome ── */
+.empty {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 40px 24px;
+}
+.empty-inner { text-align: center; max-width: 540px; width: 100%; }
+
+.empty-title {
+  font-size: 26px; font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--t1); margin-bottom: 8px;
+}
+.empty-sub {
+  font-size: 14px; color: var(--t2);
+  margin-bottom: 36px;
+}
+
+.sug-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  text-align: left;
+}
+.sug-card {
+  background: var(--s1);
+  border: 1px solid var(--bd2);
+  border-radius: 10px;
+  padding: 14px 16px;
+  cursor: pointer; font-family: inherit;
+  text-align: left; width: 100%;
+  transition: background .1s, border-color .1s;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.sug-card:hover { background: var(--s2); border-color: var(--t3); }
+.sug-label {
+  font-size: 13px; font-weight: 500; color: var(--t1);
+}
+.sug-desc { font-size: 11.5px; color: var(--t3); }
+
+/* ── Claude panel ── */
+.claude-wrap {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 40px 24px;
+}
+.claude-card {
+  background: var(--sb);
+  border: 1px solid var(--bd2);
+  border-radius: 12px;
+  padding: 28px 30px;
+  max-width: 460px; width: 100%;
+}
+.cc-title { font-size: 17px; font-weight: 600; margin-bottom: 10px; letter-spacing: -0.02em; }
+.cc-desc  { font-size: 13px; color: var(--t2); line-height: 1.65; margin-bottom: 22px; }
+.cc-steps { display: flex; flex-direction: column; gap: 14px; }
+.cc-step  { display: flex; gap: 12px; align-items: flex-start; }
+.step-n {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--blue); color: #fff;
+  font-size: 11px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.step-t { font-size: 13px; color: var(--t2); line-height: 1.55; }
+.step-t strong { color: var(--t1); font-weight: 500; }
+.step-t em     { color: var(--t1); font-style: normal; }
+.sep { border: none; border-top: 1px solid var(--bd); margin: 20px 0; }
+.cc-foot { font-size: 11.5px; color: var(--t3); line-height: 1.8; }
+code {
+  background: var(--s1); border: 1px solid var(--bd2);
+  border-radius: 4px; padding: 1px 5px;
+  font: 10.5px 'SF Mono','Fira Code',ui-monospace,monospace;
+  color: #a78bfa;
+}
+
+/* ── Input ── */
+.input-wrap {
+  border-top: 1px solid var(--bd);
+  background: var(--bg);
+  padding: 14px 24px 18px;
+  flex-shrink: 0;
+}
+.input-inner { max-width: 720px; margin: 0 auto; }
+.input-box {
+  display: flex; align-items: flex-end; gap: 10px;
+  background: var(--s1);
+  border: 1px solid var(--bd2);
+  border-radius: 12px;
+  padding: 10px 10px 10px 16px;
+  transition: border-color .12s;
+}
+.input-box:focus-within { border-color: var(--bd2); box-shadow: 0 0 0 3px rgba(37,99,235,.12); }
+textarea {
+  flex: 1; background: none; border: none;
+  color: var(--t1); font: 14px 'Inter', sans-serif;
+  resize: none; outline: none;
+  min-height: 24px; max-height: 180px;
+  line-height: 1.55;
+  padding: 0;
+}
+textarea::placeholder { color: var(--t3); }
+.send-btn {
+  width: 34px; height: 34px;
+  background: var(--blue); border: none; border-radius: 8px;
+  color: #fff; cursor: pointer; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .12s, opacity .12s;
+}
+.send-btn:hover    { background: var(--blue-h); }
+.send-btn:disabled { opacity: .35; cursor: not-allowed; }
+.input-foot {
+  display: flex; gap: 14px; margin-top: 8px; padding: 0 2px;
+}
+.key-hint { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--t3); }
+kbd {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--s1); border: 1px solid var(--bd2);
+  border-radius: 4px; padding: 1px 5px;
+  font: 10px 'Inter', sans-serif; color: var(--t2);
+  line-height: 1.6;
+}
+
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ══ Sidebar ══ -->
+  <aside class="sb">
+
+    <div class="sb-top">
+      <div class="logo-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <rect x="1" y="3" width="14" height="10" rx="1.5" stroke="white" stroke-width="1.4"/>
+          <path d="M1 5.5l7 4.5 7-4.5" stroke="white" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="logo-name">M365 Assistant</span>
+    </div>
+
+    <div class="sb-body">
+
+      <div class="mode-row">
+        <button class="mode-btn" id="tab-claude" onclick="setMode('claude')">Claude</button>
+        <button class="mode-btn active" id="tab-local" onclick="setMode('local')">Local AI</button>
+      </div>
+
+      <!-- Local config -->
+      <div id="local-cfg" class="cfg">
+        <div>
+          <label class="field-lbl">Provider</label>
+          <div class="sel-wrap">
+            <select id="provider" onchange="onProviderChange()">
+              <option value="ollama">Ollama</option>
+              <option value="lmstudio">LM Studio</option>
+              <option value="custom">Custom URL</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="custom-url-field" class="hidden">
+          <label class="field-lbl">Base URL</label>
+          <input type="text" id="custom-url" placeholder="http://localhost:8080" />
+        </div>
+
+        <div>
+          <label class="field-lbl">Model</label>
+          <div class="sel-wrap">
+            <select id="model-select" onchange="onModelChange()">
+              <option value="">Select a model</option>
+            </select>
+          </div>
+          <div class="hint" id="model-hint"></div>
+          <button class="refresh-btn" onclick="loadModels()" style="margin-top:5px;">
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M13.5 8A5.5 5.5 0 1 1 8 2.5a5.5 5.5 0 0 1 3.9 1.6L14 2"/><polyline points="14 2 14 6 10 6"/></svg>
+            Refresh
+          </button>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Quick actions -->
+      <div id="quick-actions">
+        <button class="nav-item" onclick="suggest('Show my unread emails')">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 5.5l7 4.5 7-4.5"/></svg>
+          Unread emails
+        </button>
+        <button class="nav-item" onclick="suggest('Search for emails from last week')">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="6.5" cy="6.5" r="4.5"/><line x1="10" y1="10" x2="14" y2="14"/></svg>
+          Search emails
+        </button>
+        <button class="nav-item" onclick="suggest('Draft a reply to my latest email')">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M14 10.5v3h-3"/><path d="M14 13.5a6 6 0 1 1-1.76-4.24"/></svg>
+          Draft a reply
+        </button>
+        <button class="nav-item" onclick="clearChat()">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><polyline points="3 4 13 4"/><path d="M5 4V2.5h6V4"/><rect x="2.5" y="4" width="11" height="10" rx="1"/><line x1="6" y1="7" x2="6" y2="11"/><line x1="10" y1="7" x2="10" y2="11"/></svg>
+          Clear chat
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Status -->
+    <div class="sb-status">
+      <div class="status-row">
+        <div class="dot" id="auth-dot"></div>
+        <span id="auth-label">Checking…</span>
+      </div>
+      <div class="status-row">
+        <div class="dot" id="model-dot"></div>
+        <span id="model-label">No model selected</span>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ══ Main ══ -->
+  <main class="main">
+
+    <!-- Claude mode info -->
+    <div id="claude-panel" class="hidden" style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
+      <div class="hdr">
+        <div>
+          <span class="hdr-model">Claude Desktop</span>
+          <span class="hdr-via">via MCP protocol</span>
+        </div>
+        <span class="hdr-badge">MCP</span>
+      </div>
+      <div class="claude-wrap">
+        <div class="claude-card">
+          <div class="cc-title">Using M365 with Claude Desktop</div>
+          <div class="cc-desc">The MCP server runs as a background process. Claude Desktop connects automatically and exposes all 30+ Microsoft 365 tools in conversation.</div>
+          <div class="cc-steps">
+            <div class="cc-step">
+              <div class="step-n">1</div>
+              <div class="step-t">Open <strong>Claude Desktop</strong> — the Mac app, not the browser</div>
+            </div>
+            <div class="cc-step">
+              <div class="step-n">2</div>
+              <div class="step-t">Look for the <strong>hammer icon</strong> near the chat input — confirms MCP is connected</div>
+            </div>
+            <div class="cc-step">
+              <div class="step-n">3</div>
+              <div class="step-t">Ask naturally: <em>"Show my unread emails"</em>, <em>"Schedule a meeting for tomorrow 3pm"</em>, <em>"Find budget.xlsx in OneDrive"</em></div>
+            </div>
+          </div>
+          <hr class="sep">
+          <div class="cc-foot">
+            Config: <code>~/Library/Application Support/Claude/claude_desktop_config.json</code><br>
+            Tokens: <code>~/.outlook-mcp-tokens.json</code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Local model chat -->
+    <div id="local-panel" style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
+      <div class="hdr">
+        <div>
+          <span class="hdr-model" id="hdr-title">Local Model</span>
+          <span class="hdr-via" id="hdr-sub">Select a model to begin</span>
+        </div>
+        <span class="hdr-badge hidden" id="hdr-badge"></span>
+      </div>
+
+      <div class="msgs-wrap" id="msgs-wrap">
+
+        <!-- Welcome -->
+        <div class="empty" id="welcome">
+          <div class="empty-inner">
+            <div class="empty-title">What can I help with?</div>
+            <div class="empty-sub">Access your Microsoft 365 email, calendar, and files using a local AI model.</div>
+            <div class="sug-grid">
+              <button class="sug-card" onclick="suggest('Show my unread emails')">
+                <span class="sug-label">Unread emails</span>
+                <span class="sug-desc">Check your inbox for new messages</span>
+              </button>
+              <button class="sug-card" onclick="suggest('Search for emails about invoices')">
+                <span class="sug-label">Search inbox</span>
+                <span class="sug-desc">Find emails by keyword or sender</span>
+              </button>
+              <button class="sug-card" onclick="suggest('Read my latest email')">
+                <span class="sug-label">Read latest email</span>
+                <span class="sug-desc">Open and summarize your newest message</span>
+              </button>
+              <button class="sug-card" onclick="suggest('Draft a follow-up email to my last contact')">
+                <span class="sug-label">Draft an email</span>
+                <span class="sug-desc">Compose a follow-up or new message</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Messages injected here -->
+        <div class="msgs" id="messages" style="display:none;"></div>
+
+      </div>
+
+      <!-- Input -->
+      <div class="input-wrap">
+        <div class="input-inner">
+          <div class="input-box">
+            <textarea
+              id="input"
+              placeholder="Ask about your emails, calendar, or files…"
+              rows="1"
+              onkeydown="onKey(event)"
+              oninput="resize(this)"
+            ></textarea>
+            <button class="send-btn" id="send-btn" onclick="send()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+            </button>
+          </div>
+          <div class="input-foot">
+            <div class="key-hint"><kbd>↵</kbd> send</div>
+            <div class="key-hint"><kbd>⇧↵</kbd> newline</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+let mode    = 'local';
+let history = [];
+let busy    = false;
+
+checkStatus();
+loadModels();
+
+function setMode(m) {
+  mode = m;
+  document.getElementById('tab-claude').classList.toggle('active', m === 'claude');
+  document.getElementById('tab-local').classList.toggle('active',  m === 'local');
+  const cp = document.getElementById('claude-panel');
+  const lp = document.getElementById('local-panel');
+  cp.style.display = m === 'claude' ? 'flex' : 'none';
+  lp.style.display = m === 'local'  ? 'flex' : 'none';
+  document.getElementById('local-cfg').style.display     = m === 'local' ? 'flex' : 'none';
+  document.getElementById('quick-actions').style.display = m === 'local' ? 'block' : 'none';
+}
+
+function onProviderChange() {
+  const p = document.getElementById('provider').value;
+  document.getElementById('custom-url-field').classList.toggle('hidden', p !== 'custom');
+  loadModels();
+}
+
+function onModelChange() {
+  const m = document.getElementById('model-select').value;
+  const p = document.getElementById('provider').value;
+  if (m) {
+    document.getElementById('model-dot').className   = 'dot green';
+    document.getElementById('model-label').textContent = m;
+    document.getElementById('hdr-title').textContent   = m;
+    document.getElementById('hdr-sub').textContent     = 'via ' + providerLabel(p);
+    const b = document.getElementById('hdr-badge');
+    b.textContent = providerLabel(p); b.classList.remove('hidden');
+  } else {
+    document.getElementById('model-dot').className     = 'dot yellow';
+    document.getElementById('model-label').textContent = 'No model selected';
+    document.getElementById('hdr-title').textContent   = 'Local Model';
+    document.getElementById('hdr-sub').textContent     = 'Select a model to begin';
+    document.getElementById('hdr-badge').classList.add('hidden');
+  }
+}
+
+function providerLabel(p) {
+  return { ollama:'Ollama', lmstudio:'LM Studio', custom:'Custom' }[p] || p;
+}
+
+async function loadModels() {
+  const p    = document.getElementById('provider').value;
+  const url  = document.getElementById('custom-url').value;
+  const sel  = document.getElementById('model-select');
+  const hint = document.getElementById('model-hint');
+  hint.textContent = 'Connecting…'; hint.className = 'hint';
+  let ep = `/api/models?provider=${p}`;
+  if (p === 'custom' && url) ep += `&url=${encodeURIComponent(url)}`;
+  try {
+    const d = await fetch(ep).then(r => r.json());
+    if (d.error) {
+      hint.textContent = d.error; hint.className = 'hint err';
+      sel.innerHTML = '<option value="">No models found</option>';
+    } else if (!d.models.length && d.allModels && d.allModels.length) {
+      hint.textContent = 'No tool-capable models found — pull llama3.2 or qwen2.5';
+      hint.className = 'hint err';
+      sel.innerHTML = '<option value="">No compatible models</option>';
+    } else if (!d.models.length) {
+      hint.textContent = providerLabel(p) + ' not running'; hint.className = 'hint err';
+      sel.innerHTML = '<option value="">No models found</option>';
+    } else {
+      sel.innerHTML = d.models.map(m => `<option value="${esc(m)}">${esc(m)}</option>`).join('');
+      const filtered = d.filtered || 0;
+      const suffix = filtered ? ` · ${filtered} incompatible hidden` : '';
+      hint.textContent = d.models.length + ' model' + (d.models.length > 1 ? 's' : '') + ' available' + suffix;
+      hint.className = 'hint ok';
+      onModelChange();
+    }
+  } catch { hint.textContent = 'Connection failed'; hint.className = 'hint err'; }
+}
+
+async function checkStatus() {
+  try {
+    const d = await fetch('/api/status').then(r => r.json());
+    document.getElementById('auth-dot').className      = d.authenticated ? 'dot green' : 'dot red';
+    document.getElementById('auth-label').textContent  = d.authenticated ? 'M365 connected' : 'Not authenticated';
+  } catch { document.getElementById('auth-label').textContent = 'Status unknown'; }
+}
+
+function suggest(text) {
+  if (busy) return;
+  document.getElementById('input').value = text;
+  send();
+}
+
+async function send() {
+  if (busy) return;
+  const input    = document.getElementById('input');
+  const text     = input.value.trim();
+  if (!text) return;
+  const model    = document.getElementById('model-select').value;
+  const provider = document.getElementById('provider').value;
+  const customUrl= document.getElementById('custom-url').value;
+  if (!model) { alert('Please select a model first.'); return; }
+
+  // Show messages pane, hide welcome
+  const welcome = document.getElementById('welcome');
+  if (welcome) welcome.style.display = 'none';
+  document.getElementById('messages').style.display = 'flex';
+
+  history.push({ role: 'user', content: text });
+  appendMsg('user', text, null);
+  input.value = ''; input.style.height = 'auto';
+  busy = true;
+  document.getElementById('send-btn').disabled = true;
+  const tid = appendThinking();
+
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: history, provider, model, ...(provider === 'custom' && { customUrl }) })
+    });
+    removeEl(tid);
+    if (!res.ok) {
+      const e = await res.json().catch(() => ({ error: res.statusText }));
+      const msg = 'Error: ' + e.error;
+      appendMsg('assistant', msg, null); history.push({ role:'assistant', content: msg });
+    } else {
+      const d = await res.json();
+      const content = d.content || '(No response)';
+      appendMsg('assistant', content, d.toolsUsed); history.push({ role:'assistant', content });
+    }
+  } catch (err) {
+    removeEl(tid);
+    const msg = 'Connection error: ' + err.message;
+    appendMsg('assistant', msg, null);
+  }
+  busy = false;
+  document.getElementById('send-btn').disabled = false;
+  scrollBottom();
+}
+
+function appendMsg(role, content, toolsUsed) {
+  const wrap = document.createElement('div');
+  wrap.className = 'msg ' + role;
+
+  const avatarLetter = role === 'user' ? 'Y' : 'M';
+  let html = `<div class="msg-avatar">${avatarLetter}</div><div class="msg-body">`;
+
+  if (role === 'assistant' && toolsUsed && toolsUsed.length) {
+    html += '<div class="tools-row">';
+    toolsUsed.forEach(t => {
+      html += `<span class="tool-chip"><span class="chip-dot"></span>${esc(t.name)}</span>`;
+    });
+    html += '</div>';
+  }
+
+  html += `<div class="bubble">${esc(content)}</div>`;
+  html += `<div class="msg-time">${timestamp()}</div>`;
+  html += '</div>';
+  wrap.innerHTML = html;
+
+  document.getElementById('messages').appendChild(wrap);
+  scrollBottom();
+}
+
+function appendThinking() {
+  const id  = 'th-' + Date.now();
+  const div = document.createElement('div');
+  div.id = id; div.className = 'thinking-row';
+  div.innerHTML = `
+    <div class="msg-avatar">M</div>
+    <div class="think-body">
+      <div class="think-dots"><span></span><span></span><span></span></div>
+      <span>Thinking…</span>
+    </div>`;
+  document.getElementById('messages').appendChild(div);
+  scrollBottom();
+  return id;
+}
+
+function clearChat() {
+  history = [];
+  document.getElementById('messages').innerHTML = '';
+  document.getElementById('messages').style.display = 'none';
+  const welcome = document.getElementById('welcome');
+  if (welcome) welcome.style.display = 'flex';
+}
+
+function onKey(e)  { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }
+function resize(el){ el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 180) + 'px'; }
+function scrollBottom() {
+  const w = document.getElementById('msgs-wrap');
+  w.scrollTop = w.scrollHeight;
+}
+function removeEl(id) { const el = document.getElementById(id); if (el) el.remove(); }
+function timestamp()  { return new Date().toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' }); }
+function esc(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>
