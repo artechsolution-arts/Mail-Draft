@@ -14,7 +14,9 @@
     "auth-server": "node outlook-auth-server.js",
     "test-mode": "USE_TEST_MODE=true node index.js",
     "inspect": "npx @modelcontextprotocol/inspector node index.js",
-    "db:migrate": "node crm/migrate.js"
+    "db:migrate": "node crm/migrate.js",
+    "build:ui": "cd web-ui/client && npm install && npm run build",
+    "dev:ui": "cd web-ui/client && npm run dev"
   },
   "keywords": [
     "claude",

@@ -219,6 +219,12 @@ app.get('/crm/auth/logout', (req, res) => {
   req.session.destroy(() => res.redirect('/crm-login.html'));
 });
 
+// Serve React build when available
+const reactDist = path.join(__dirname, 'public', 'dist');
+if (require('fs').existsSync(reactDist)) {
+  app.use(express.static(reactDist));
+}
+
 // ── Static files (login page, crm page) ──────────────────────────────────────
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -743,6 +749,101 @@ app.post('/api/crm/drafts/:id/escalate', requireAuth, async (req, res) => {
   }
 });
 
+// ── Customer-level escalation (no specific draft required) ───────────────────
+app.post('/api/crm/customers/:email/escalate', requireAuth, async (req, res) => {
+  try {
+    const { callGraphAPI } = require('../utils/graph-api');
+    const ue           = req.session.userEmail;
+    const customerEmail = decodeURIComponent(req.params.email);
+    const { escalateTo, note } = req.body;
+
+    if (!escalateTo || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(escalateTo.trim())) {
+      return res.status(400).json({ error: 'A valid escalation email address is required' });
+    }
+
+    const customer = await crmStorage.getCustomer(ue, customerEmail);
+    if (!customer) return res.status(404).json({ error: 'Customer not found' });
+
+    const received   = (customer.receivedEmails || []).slice(0, 30);
+    const sent       = (customer.sentEmails     || []).slice(0, 30);
+    const allEmails  = [...received.map(e => ({ ...e, dir: 'Received' })), ...sent.map(e => ({ ...e, dir: 'Sent' }))]
+      .sort((a, b) => new Date(a.date || a.recordedAt) - new Date(b.date || b.recordedAt));
+    const notes      = (customer.notes      || []).slice(0, 20);
+    const quotes     = (customer.quotations || []).slice(0, 10);
+    const followUps  = (customer.followUps  || []).filter(f => f.status === 'pending').slice(0, 10);
+
+    function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+    const emailRows = allEmails.map(e => `
+      <tr style="border-bottom:1px solid #e5e7eb">
+        <td style="padding:8px 12px;font-size:12px;color:#6b7280;white-space:nowrap">${new Date(e.date || e.recordedAt).toLocaleString()}</td>
+        <td style="padding:8px 12px;font-size:12px">
+          <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;${e.dir==='Received'?'background:#dbeafe;color:#1d4ed8':'background:#dcfce7;color:#166534'}">${e.dir}</span>
+        </td>
+        <td style="padding:8px 12px;font-size:13px;font-weight:600">${esc(e.subject)}</td>
+        <td style="padding:8px 12px;font-size:12px;color:#374151;max-width:400px">${esc((e.body||'').slice(0,300))}${(e.body||'').length>300?'…':''}</td>
+      </tr>`).join('');
+
+    const noteRows  = notes.map(n => `<li style="margin-bottom:6px;font-size:13px;color:#374151">${esc(n.text)} <span style="color:#9ca3af;font-size:11px">${new Date(n.createdAt).toLocaleDateString()}</span></li>`).join('');
+    const quoteRows = quotes.map(q => `<tr style="border-bottom:1px solid #e5e7eb"><td style="padding:8px 12px;font-size:13px;font-weight:600">${esc(q.reference)}</td><td style="padding:8px 12px;font-size:12px">${esc(q.description)}</td><td style="padding:8px 12px;font-size:12px">${esc(q.amount)} ${esc(q.currency)}</td><td style="padding:8px 12px;font-size:12px">${q.validUntil ? new Date(q.validUntil).toLocaleDateString() : '—'}</td></tr>`).join('');
+    const fuRows    = followUps.map(f => `<li style="margin-bottom:6px;font-size:13px;color:#374151"><strong>${esc(f.subject||'No subject')}</strong> — Due ${new Date(f.dueAt).toLocaleDateString()}${f.note ? `<br><span style="color:#6b7280">${esc(f.note)}</span>` : ''}</li>`).join('');
+
+    const htmlBody = `<!DOCTYPE html><html><head><meta charset="UTF-8"></head>
+<body style="font-family:system-ui,sans-serif;color:#1c1917;max-width:800px;margin:0 auto;padding:24px">
+<div style="background:#1A6AB4;color:#fff;border-radius:10px 10px 0 0;padding:20px 24px">
+  <h1 style="margin:0;font-size:20px">⚠️ Escalation — Action Required</h1>
+  <p style="margin:6px 0 0;font-size:13px;opacity:.9">Escalated by ${esc(ue)}</p>
+</div>
+<div style="border:1px solid #e5e2dc;border-top:none;border-radius:0 0 10px 10px;padding:24px">
+  ${note ? `<div style="background:#fef9c3;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin-bottom:20px"><strong style="font-size:13px">Note from ${esc(ue)}:</strong><br><span style="font-size:13px">${esc(note)}</span></div>` : ''}
+  <h2 style="font-size:15px;font-weight:700;margin-bottom:12px;border-bottom:2px solid #1A6AB4;padding-bottom:6px">Customer Profile</h2>
+  <table style="font-size:13px;margin-bottom:20px">
+    <tr><td style="color:#6b7280;padding:3px 16px 3px 0;white-space:nowrap">Name</td><td><strong>${esc(customer.name||'—')}</strong></td></tr>
+    <tr><td style="color:#6b7280;padding:3px 16px 3px 0">Email</td><td>${esc(customer.email)}</td></tr>
+    <tr><td style="color:#6b7280;padding:3px 16px 3px 0">Company</td><td>${esc(customer.company||'—')}</td></tr>
+    <tr><td style="color:#6b7280;padding:3px 16px 3px 0">Phone</td><td>${esc(customer.phone||'—')}</td></tr>
+    <tr><td style="color:#6b7280;padding:3px 16px 3px 0">Since</td><td>${new Date(customer.since||customer.createdAt||Date.now()).toLocaleDateString()}</td></tr>
+  </table>
+  <h2 style="font-size:15px;font-weight:700;margin-bottom:12px;border-bottom:2px solid #1A6AB4;padding-bottom:6px">Full Email History (${allEmails.length} emails)</h2>
+  ${allEmails.length ? `<table style="width:100%;border-collapse:collapse;margin-bottom:20px"><thead><tr style="background:#f7f5f2"><th style="padding:8px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;color:#6b7280">Date</th><th style="padding:8px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;color:#6b7280">Dir</th><th style="padding:8px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;color:#6b7280">Subject</th><th style="padding:8px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;color:#6b7280">Preview</th></tr></thead><tbody>${emailRows}</tbody></table>` : '<p style="font-size:13px;color:#9ca3af;margin-bottom:20px">No emails recorded yet.</p>'}
+  ${notes.length ? `<h2 style="font-size:15px;font-weight:700;margin-bottom:12px;border-bottom:2px solid #1A6AB4;padding-bottom:6px">Internal Notes (${notes.length})</h2><ul style="padding-left:20px;margin-bottom:20px">${noteRows}</ul>` : ''}
+  ${quotes.length ? `<h2 style="font-size:15px;font-weight:700;margin-bottom:12px;border-bottom:2px solid #1A6AB4;padding-bottom:6px">Quotations (${quotes.length})</h2><table style="width:100%;border-collapse:collapse;margin-bottom:20px"><thead><tr style="background:#f7f5f2"><th style="padding:8px 12px;text-align:left;font-size:11px">Reference</th><th style="padding:8px 12px;text-align:left;font-size:11px">Description</th><th style="padding:8px 12px;text-align:left;font-size:11px">Amount</th><th style="padding:8px 12px;text-align:left;font-size:11px">Valid Until</th></tr></thead><tbody>${quoteRows}</tbody></table>` : ''}
+  ${followUps.length ? `<h2 style="font-size:15px;font-weight:700;margin-bottom:12px;border-bottom:2px solid #1A6AB4;padding-bottom:6px">Pending Follow-ups (${followUps.length})</h2><ul style="padding-left:20px;margin-bottom:20px">${fuRows}</ul>` : ''}
+  <hr style="border:none;border-top:1px solid #e5e2dc;margin:24px 0">
+  <p style="font-size:11px;color:#9ca3af">This escalation was sent automatically from the CRM system by ${esc(ue)}.</p>
+</div></body></html>`;
+
+    const escalationId = await crmStorage.saveEscalation(ue, customer.email, null, escalateTo.trim(), note, false, null);
+
+    const token = await syncWorker.getValidToken(ue, {
+      clientId: process.env.MS_CLIENT_ID || process.env.OUTLOOK_CLIENT_ID,
+      clientSecret: process.env.MS_CLIENT_SECRET || process.env.OUTLOOK_CLIENT_SECRET,
+      tenantId: process.env.MS_TENANT_ID || 'common',
+      redirectUri: REDIRECT_URI,
+    });
+
+    if (!token) {
+      await pool.query('UPDATE crm_escalations SET send_error=$1 WHERE id=$2', ['No Outlook token', escalationId]);
+      return res.status(401).json({ error: 'Outlook is not connected.', saved: true, escalationId, loginUrl: '/crm/auth/login' });
+    }
+
+    await callGraphAPI(token, 'POST', 'me/sendMail', {
+      message: {
+        subject: `[Escalation] ${customer.name || customer.email} — Customer Case`,
+        body: { contentType: 'HTML', content: htmlBody },
+        toRecipients: [{ emailAddress: { address: escalateTo.trim() } }],
+      },
+      saveToSentItems: true,
+    });
+
+    await pool.query('UPDATE crm_escalations SET email_sent=TRUE WHERE id=$1', [escalationId]);
+    res.json({ ok: true, escalatedTo: escalateTo.trim() });
+  } catch (e) {
+    console.error('Customer escalate error:', e.message);
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // ── SSE — real-time push when background worker finds new emails ──────────────
 app.get('/api/crm/stream', requireAuth, (req, res) => {
   const ue = req.session.userEmail;
@@ -1094,6 +1195,14 @@ app.post('/api/crm/chat', requireAuth, async (req, res) => {
     console.error('CRM chat error:', e.message);
     res.status(500).json({ error: e.message, hint: 'Make sure Ollama is running: ollama serve' });
   }
+});
+
+// SPA fallback — serve React index.html for non-API routes
+const reactIndex = path.join(__dirname, 'public', 'dist', 'index.html');
+app.get('/{*path}', (req, res, next) => {
+  if (req.path.startsWith('/api') || req.path.startsWith('/crm/auth') || req.path.startsWith('/v1')) return next();
+  if (require('fs').existsSync(reactIndex)) return res.sendFile(reactIndex);
+  next();
 });
 
 // ── Start ─────────────────────────────────────────────────────────────────────
