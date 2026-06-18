@@ -135,5 +135,5 @@ export async function setFollowUpDays(days) {
 }
 
 export async function sendChat({ query, customerEmail }) {
-  return request('POST', '/api/crm/chat', { query, customerEmail });
+  return request('POST', '/api/crm/chat', { message: query, customerEmail });
 }
