@@ -70,7 +70,7 @@ export async function updateFollowUp(email, fuId, status) {
 }
 
 export async function getOverdueFollowUps() {
-  return request('GET', '/api/crm/follow-ups/overdue');
+  return request('GET', '/api/crm/followups/overdue');
 }
 
 export async function getDrafts() {

@@ -84,7 +84,7 @@ export function AppProvider({ children }) {
   const loadCustomers = useCallback(async () => {
     try {
       const data = await getCustomers();
-      dispatch({ type: SET_CUSTOMERS, payload: data });
+      dispatch({ type: SET_CUSTOMERS, payload: Array.isArray(data) ? data : [] });
     } catch (err) {
       console.error('loadCustomers error:', err);
     }
@@ -122,7 +122,7 @@ export function AppProvider({ children }) {
   const loadNotifications = useCallback(async () => {
     try {
       const data = await getOverdueFollowUps();
-      dispatch({ type: SET_NOTIFICATIONS, payload: data });
+      dispatch({ type: SET_NOTIFICATIONS, payload: Array.isArray(data) ? data : [] });
     } catch (err) {
       console.error('loadNotifications error:', err);
     }

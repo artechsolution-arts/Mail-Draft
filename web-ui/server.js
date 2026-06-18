@@ -42,7 +42,7 @@ app.use(helmet({
     directives: {
       defaultSrc:    ["'self'"],
       scriptSrc:     ["'self'", "'unsafe-inline'"],
-      scriptSrcAttr: ["'unsafe-inline'"],  // allow onclick="..." in crm.html
+      scriptSrcAttr: ["'unsafe-inline'"],
       styleSrc:      ["'self'", "'unsafe-inline'", 'fonts.googleapis.com', 'api.fontshare.com'],
       fontSrc:       ["'self'", 'fonts.gstatic.com', 'api.fontshare.com', 'cdn.fontshare.com'],
       imgSrc:        ["'self'", 'data:'],
@@ -102,8 +102,8 @@ const crypto           = require('crypto');
 
 function requireAuth(req, res, next) {
   if (req.session?.userEmail) return next();
-  if ((req.originalUrl || req.path).startsWith('/api/')) return res.status(401).json({ error: 'Not authenticated', redirect: '/crm-login.html' });
-  res.redirect('/crm-login.html');
+  if ((req.originalUrl || req.path).startsWith('/api/')) return res.status(401).json({ error: 'Not authenticated', redirect: '/' });
+  res.redirect('/');
 }
 
 function httpsPost(url, data) {
@@ -184,10 +184,10 @@ app.get('/crm/auth/callback', async (req, res) => {
   const { code, state, error, error_description } = req.query;
   if (error) {
     console.error('[auth] Microsoft OAuth error:', error, '|', error_description);
-    return res.redirect(`/crm-login.html?error=${encodeURIComponent(error_description || error)}`);
+    return res.redirect(`/login?error=${encodeURIComponent(error_description || error)}`);
   }
   console.log('[auth] callback received — code:', !!code, 'state match:', state === req.session.oauthState, 'sessionState:', req.session.oauthState?.slice(0,8));
-  if (!code || state !== req.session.oauthState) return res.redirect('/crm-login.html?error=invalid_state');
+  if (!code || state !== req.session.oauthState) return res.redirect('/login?error=invalid_state');
 
   try {
     const tokens = await httpsPost(
@@ -195,11 +195,11 @@ app.get('/crm/auth/callback', async (req, res) => {
       { client_id: MS_CLIENT_ID, client_secret: MS_CLIENT_SECRET, grant_type: 'authorization_code', code, redirect_uri: REDIRECT_URI }
     );
     console.log('[auth] token response — error:', tokens.error, '|', tokens.error_description);
-    if (tokens.error) return res.redirect(`/crm-login.html?error=${encodeURIComponent(tokens.error_description || tokens.error)}`);
+    if (tokens.error) return res.redirect(`/login?error=${encodeURIComponent(tokens.error_description || tokens.error)}`);
 
     const me    = await bearerGet('https://graph.microsoft.com/v1.0/me', tokens.access_token);
     const email = (me.mail || me.userPrincipalName || '').toLowerCase();
-    if (!email) return res.redirect('/crm-login.html?error=no_email');
+    if (!email) return res.redirect('/login?error=no_email');
 
     await crmStorage.ensureUser(email, me.displayName || '');
     req.session.userEmail      = email;
@@ -216,15 +216,15 @@ app.get('/crm/auth/callback', async (req, res) => {
       expiresAt:    Date.now() + (tokens.expires_in || 3600) * 1000,
     });
 
-    res.redirect('/crm.html');
+    res.redirect('/');
   } catch (e) {
     console.error('OAuth callback error:', e.message);
-    res.redirect(`/crm-login.html?error=${encodeURIComponent(e.message)}`);
+    res.redirect(`/login?error=${encodeURIComponent(e.message)}`);
   }
 });
 
 app.get('/crm/auth/logout', (req, res) => {
-  req.session.destroy(() => res.redirect('/crm-login.html'));
+  req.session.destroy(() => res.redirect('/'));
 });
 
 // Serve React build when available
@@ -287,7 +287,7 @@ if (process.env.NODE_ENV !== 'production') {
     await crmStorage.ensureUser(email, name);
     req.session.userEmail = email;
     req.session.userName  = name;
-    res.redirect('/crm.html');
+    res.redirect('/');
   });
 }
 
@@ -310,7 +310,7 @@ app.post('/api/crm/customers/:customerEmail/send-email',
     }
 
     const token = await getValidToken(req);
-    if (!token) return res.status(401).json({ error: 'No access token — please sign in again', redirect: '/crm-login.html' });
+    if (!token) return res.status(401).json({ error: 'No access token — please sign in again', redirect: '/' });
 
     // Build Graph API attachments array from uploaded files
     const attachments = (req.files || []).map(f => ({
@@ -400,8 +400,9 @@ app.post('/api/crm/customers/import/preview', requireAuth, xlsxImport.single('fi
     const ws   = wb.Sheets[wb.SheetNames[0]];
     const rows = XLSX.utils.sheet_to_json(ws, { defval: '', range: 0 });
     if (!rows.length) return res.status(400).json({ error: 'No data rows found' });
-    const cols = detectColumns(Object.keys(rows[0]));
-    res.json({ rowCount: rows.length, sheet: wb.SheetNames[0], columns: cols, allColumns: Object.keys(rows[0]).slice(0, 20) });
+    const rawCols = Object.keys(rows[0]);
+    const detected = detectColumns(rawCols);
+    res.json({ rowCount: rows.length, sheet: wb.SheetNames[0], columns: rawCols.slice(0, 20), detected });
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
@@ -590,7 +591,7 @@ app.post('/api/crm/drafts/:id/send', upload.array('attachments', 10), async (req
   const draftId = req.params.id;
 
   const token = await getValidToken(req);
-  if (!token) return res.status(401).json({ error: 'No access token — please sign in again', redirect: '/crm-login.html' });
+  if (!token) return res.status(401).json({ error: 'No access token — please sign in again', redirect: '/' });
 
   try {
     const draft = await crmStorage.getDraft(ue, draftId);
@@ -936,7 +937,7 @@ app.post('/api/crm/trigger-sync', requireAuth, async (req, res) => {
     const customerMap = new Map(customers.map(c => [c.email.toLowerCase(), c]));
 
     const token = await getValidToken(req);
-    if (!token) return res.status(401).json({ error: 'No access token', redirect: '/crm-login.html' });
+    if (!token) return res.status(401).json({ error: 'No access token', redirect: '/' });
 
     // Save/refresh token in crm_tokens so background worker can reuse it
     if (req.session.refreshToken) {
@@ -1265,8 +1266,8 @@ const USE_HTTPS = fs.existsSync(CERT_FILE) && fs.existsSync(KEY_FILE);
 const PROTO = USE_HTTPS ? 'https' : 'http';
 
 function onListening() {
-  console.log(`CRM Web UI (local)  → ${PROTO}://localhost:${PORT}/crm-login.html`);
-  console.log(`CRM Web UI (LAN)    → ${PROTO}://${LAN_IP}:${PORT}/crm-login.html`);
+  console.log(`CRM Web UI (local)  → ${PROTO}://localhost:${PORT}/`);
+  console.log(`CRM Web UI (LAN)    → ${PROTO}://${LAN_IP}:${PORT}/`);
   console.log(`Tools loaded: ${ALL_TOOLS.length}`);
   console.log(`OAuth callback: ${REDIRECT_URI}`);
   if (USE_HTTPS) console.log(`TLS: self-signed cert active (browser will warn once — click "Advanced → Proceed")`);

@@ -124,7 +124,7 @@ export default {
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mail Draft CRM</title>
+  <title>Mail Assistant</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Satoshi:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -342,7 +342,7 @@ Reference the existing login page design:
 Keep the exact same visual design:
   - Centered card with amber gradient background
   - Logo icon (amber gradient square with email SVG icon)
-  - "Mail Draft CRM" wordmark using Bricolage Grotesque
+  - "Mail Assistant" wordmark using Bricolage Grotesque
   - "Welcome back" hero text
   - "Sign in with Microsoft" black button with Microsoft logo squares
   - Error banner from URL ?error= param
@@ -376,7 +376,7 @@ Write ${SRC}/components/Sidebar.jsx
 Props: none — reads from AppContext.
 
 Features:
-  - Topbar: "Mail Draft CRM" wordmark + user avatar/email (from context.user) + Settings link + Logout link (/crm/auth/logout)
+  - Topbar: "Mail Assistant" wordmark + user avatar/email (from context.user) + Settings link + Logout link (/crm/auth/logout)
   - Sync button (POST /api/crm/sync → triggers inbox sync, shows spinner while syncing)
   - "↑ Import" button (opens ImportModal)
   - "+ Customer" button (opens AddCustomerModal)
