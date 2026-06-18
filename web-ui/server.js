@@ -186,6 +186,7 @@ app.get('/crm/auth/callback', async (req, res) => {
     console.error('[auth] Microsoft OAuth error:', error, '|', error_description);
     return res.redirect(`/crm-login.html?error=${encodeURIComponent(error_description || error)}`);
   }
+  console.log('[auth] callback received — code:', !!code, 'state match:', state === req.session.oauthState, 'sessionState:', req.session.oauthState?.slice(0,8));
   if (!code || state !== req.session.oauthState) return res.redirect('/crm-login.html?error=invalid_state');
 
   try {
@@ -193,6 +194,7 @@ app.get('/crm/auth/callback', async (req, res) => {
       `https://login.microsoftonline.com/${MS_TENANT_ID}/oauth2/v2.0/token`,
       { client_id: MS_CLIENT_ID, client_secret: MS_CLIENT_SECRET, grant_type: 'authorization_code', code, redirect_uri: REDIRECT_URI }
     );
+    console.log('[auth] token response — error:', tokens.error, '|', tokens.error_description);
     if (tokens.error) return res.redirect(`/crm-login.html?error=${encodeURIComponent(tokens.error_description || tokens.error)}`);
 
     const me    = await bearerGet('https://graph.microsoft.com/v1.0/me', tokens.access_token);
