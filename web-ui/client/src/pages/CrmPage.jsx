@@ -15,7 +15,7 @@ import ImportModal             from '../components/modals/ImportModal.jsx';
 // ---------------------------------------------------------------------------
 const GRID_STYLE = {
   display: 'grid',
-  gridTemplateColumns: '248px 1fr 300px',
+  gridTemplateColumns: '248px 1fr 360px',
   height: '100dvh',
   overflow: 'hidden',
   background: 'transparent',

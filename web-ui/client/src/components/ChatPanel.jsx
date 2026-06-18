@@ -69,11 +69,11 @@ function ChatMessage({ role, content, isLoading }) {
     >
       <div
         style={{
-          maxWidth: '82%',
-          padding: '8px 12px',
+          maxWidth: '88%',
+          padding: '9px 13px',
           borderRadius: isUser ? '14px 14px 4px 14px' : '14px 14px 14px 4px',
-          fontSize: 13,
-          lineHeight: 1.55,
+          fontSize: 14,
+          lineHeight: 1.6,
           background: isUser ? 'var(--brand-primary)' : 'var(--bg-panel)',
           color: isUser ? '#fff' : 'var(--text)',
           border: isUser ? 'none' : '1px solid var(--border)',
@@ -218,7 +218,7 @@ export default function ChatPanel() {
         overflow: 'hidden',
         boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
         flexShrink: 0,
-        height: expanded ? 280 : 'auto',
+        height: expanded ? 480 : 'auto',
         transition: 'height 0.2s ease',
       }}
     >
@@ -358,8 +358,8 @@ export default function ChatPanel() {
               aria-label="Chat message"
               style={{
                 flex: 1,
-                fontSize: 13,
-                padding: '6px 10px',
+                fontSize: 14,
+                padding: '8px 12px',
                 border: '1px solid var(--border)',
                 borderRadius: 8,
                 background: isSending ? 'var(--bg-sidebar)' : 'var(--bg)',
@@ -373,9 +373,9 @@ export default function ChatPanel() {
               disabled={isSending || !input.trim()}
               style={{
                 flexShrink: 0,
-                fontSize: 12,
+                fontSize: 13,
                 fontWeight: 700,
-                padding: '6px 14px',
+                padding: '8px 16px',
                 borderRadius: 8,
                 border: 'none',
                 background: 'var(--brand-primary)',
