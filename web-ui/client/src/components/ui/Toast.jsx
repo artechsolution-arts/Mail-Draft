@@ -12,21 +12,21 @@ import React, { useEffect } from 'react';
 
 const TYPE_STYLES = {
   success: {
-    background: 'oklch(0.930 0.042 155)',  // --green-100
-    color:      'oklch(0.440 0.140 155)',  // --green-700
-    border:     '1px solid oklch(0.440 0.140 155 / 0.25)',
+    background: 'var(--green-bg)',
+    color:      'var(--green-7)',
+    border:     '1px solid var(--green-7)',
     icon: '✓',
   },
   error: {
-    background: 'oklch(0.930 0.034 25)',   // --red-100
-    color:      'oklch(0.440 0.165 25)',   // --red-700
-    border:     '1px solid oklch(0.440 0.165 25 / 0.25)',
+    background: 'var(--red-bg)',
+    color:      'var(--red-7)',
+    border:     '1px solid var(--red-7)',
     icon: '✕',
   },
   info: {
-    background: 'rgba(26,106,180,0.10)',
-    color:      '#1A6AB4',
-    border:     '1px solid rgba(26,106,180,0.25)',
+    background: 'var(--blue-bg)',
+    color:      'var(--brand-primary)',
+    border:     '1px solid var(--brand-primary)',
     icon: 'ℹ',
   },
 };
@@ -67,7 +67,7 @@ function ToastItem({ toast, removeToast }) {
           maxWidth: '380px',
           padding: '12px 14px',
           borderRadius: '10px',
-          boxShadow: '0 4px 16px oklch(0.16 0.010 68 / 0.13), 0 1px 4px oklch(0.16 0.010 68 / 0.08)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.15), 0 1px 4px rgba(0,0,0,0.08)',
           fontFamily: "'Satoshi', system-ui, sans-serif",
           fontSize: '13px',
           lineHeight: 1.5,

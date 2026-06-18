@@ -4,10 +4,10 @@ import { useApp } from '../../context/AppContext.jsx';
 
 const STATUS_BADGE = {
   draft:    { bg: 'var(--bg-panel)',  color: 'var(--text-3)',  border: 'var(--border)' },
-  sent:     { bg: 'oklch(0.930 0.034 240)', color: 'oklch(0.440 0.140 240)', border: 'oklch(0.440 0.140 240)' },
+  sent:     { bg: 'var(--blue-bg)',  color: 'var(--blue-7)',  border: 'var(--blue-7)' },
   accepted: { bg: 'var(--green-bg)',  color: 'var(--green-7)', border: 'var(--green-7)' },
   rejected: { bg: 'var(--red-bg)',    color: 'var(--red-7)',   border: 'var(--red-7)' },
-  expired:  { bg: 'oklch(0.940 0.012 60)', color: 'var(--text-3)', border: 'var(--border)' },
+  expired:  { bg: 'var(--bg-panel)', color: 'var(--text-3)', border: 'var(--border)' },
 };
 
 function StatusBadge({ status }) {

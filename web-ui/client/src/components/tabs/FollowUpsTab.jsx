@@ -3,9 +3,9 @@ import { addFollowUp, updateFollowUp } from '../../api.js';
 import { useApp } from '../../context/AppContext.jsx';
 
 const STATUS_STYLES = {
-  pending:   { background: '#fef3c7', color: '#92400e', border: '1px solid #fde68a' },
-  closed:    { background: '#dcfce7', color: '#166534', border: '1px solid #bbf7d0' },
-  dismissed: { background: 'oklch(0.940 0.008 68)', color: 'var(--text-3)', border: '1px solid var(--border)' },
+  pending:   { background: 'var(--blue-bg)', color: 'var(--brand-primary)', border: '1px solid var(--brand-primary)' },
+  closed:    { background: 'var(--green-bg)', color: 'var(--green-7)', border: '1px solid var(--green-7)' },
+  dismissed: { background: 'var(--bg-panel)', color: 'var(--text-3)', border: '1px solid var(--border)' },
 };
 
 function StatusBadge({ status }) {
@@ -50,9 +50,9 @@ function FollowUpCard({ fu, email, onRefresh }) {
   return (
     <div style={{
       padding: '14px 16px',
-      border: `1px solid ${isOverdue ? '#fb923c' : 'var(--border)'}`,
+      border: `1px solid ${isOverdue ? 'var(--red-7)' : 'var(--border)'}`,
       borderRadius: 10,
-      background: isOverdue ? '#fff7ed' : 'var(--bg)',
+      background: isOverdue ? 'var(--red-bg)' : 'var(--bg)',
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 10 }}>
         <div style={{ flex: 1 }}>
@@ -67,7 +67,7 @@ function FollowUpCard({ fu, email, onRefresh }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 6, flexWrap: 'wrap' }}>
             <StatusBadge status={fu.status} />
             {dueDate && (
-              <span style={{ fontSize: 11.5, color: isOverdue ? '#c2410c' : 'var(--text-3)', fontWeight: isOverdue ? 700 : 400 }}>
+              <span style={{ fontSize: 11.5, color: isOverdue ? 'var(--red-7)' : 'var(--text-3)', fontWeight: isOverdue ? 700 : 400 }}>
                 {isOverdue ? 'Overdue · ' : 'Due '}
                 {new Date(dueDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
               </span>

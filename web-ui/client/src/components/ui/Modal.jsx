@@ -84,10 +84,16 @@ export default function Modal({
         }
         .ui-modal-card {
           animation: ui-modal-card-in 0.22s cubic-bezier(0.34, 1.3, 0.64, 1);
+          background: var(--bg-panel) !important;
+          border: 1px solid var(--border) !important;
+          color: var(--text) !important;
+        }
+        .ui-modal-card .ui-modal-header {
+          border-bottom: 1px solid var(--border) !important;
         }
         .ui-modal-close-btn:hover {
-          background: oklch(0.910 0.011 68) !important;
-          color: oklch(0.160 0.010 68) !important;
+          background: var(--border) !important;
+          color: var(--text) !important;
         }
         @media (prefers-reduced-motion: reduce) {
           .ui-modal-overlay, .ui-modal-card { animation: none; }
@@ -106,7 +112,7 @@ export default function Modal({
           position: 'fixed',
           inset: 0,
           zIndex: 1000,
-          background: 'oklch(0.16 0.010 68 / 0.40)',
+          background: 'rgba(0,0,0,0.55)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -118,11 +124,10 @@ export default function Modal({
           className="ui-modal-card"
           onClick={(e) => e.stopPropagation()}
           style={{
-            background: 'oklch(0.988 0.004 68)',
+            background: 'var(--bg-panel)',
             borderRadius: '14px',
-            boxShadow:
-              '0 20px 40px oklch(0.16 0.010 68 / 0.18), 0 4px 12px oklch(0.16 0.010 68 / 0.10)',
-            border: '1px solid oklch(0.910 0.011 68)',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.22), 0 4px 12px rgba(0,0,0,0.12)',
+            border: '1px solid var(--border)',
             width: '100%',
             maxWidth: MAX_WIDTHS[maxWidth] || MAX_WIDTHS.md,
             maxHeight: 'calc(100vh - 48px)',
@@ -133,12 +138,13 @@ export default function Modal({
         >
           {/* Header */}
           <div
+            className="ui-modal-header"
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               padding: '18px 22px 16px',
-              borderBottom: '1px solid oklch(0.910 0.011 68)',
+              borderBottom: '1px solid var(--border)',
               flexShrink: 0,
             }}
           >
@@ -150,7 +156,7 @@ export default function Modal({
                   fontSize: '16px',
                   fontWeight: 700,
                   letterSpacing: '-0.02em',
-                  color: 'oklch(0.160 0.010 68)',
+                  color: 'var(--text)',
                   margin: 0,
                 }}
               >
@@ -172,7 +178,7 @@ export default function Modal({
                 borderRadius: '6px',
                 border: 'none',
                 background: 'transparent',
-                color: 'oklch(0.570 0.014 68)',
+                color: 'var(--text-3)',
                 fontSize: '15px',
                 cursor: 'pointer',
                 transition: 'background 0.12s, color 0.12s',
@@ -192,7 +198,7 @@ export default function Modal({
               padding: '22px',
               fontFamily: "'Satoshi', system-ui, sans-serif",
               fontSize: '13.5px',
-              color: 'oklch(0.160 0.010 68)',
+              color: 'var(--text)',
               lineHeight: 1.6,
             }}
           >

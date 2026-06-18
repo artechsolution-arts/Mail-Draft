@@ -111,3 +111,40 @@
 5:20:20 PM [vite] hmr update /src/components/NotificationPanel.jsx, /src/index.css
 5:20:24 PM [vite] hmr update /src/components/NotificationPanel.jsx, /src/index.css
 5:20:35 PM [vite] hmr update /src/components/NotificationPanel.jsx, /src/index.css
+5:28:46 PM [vite] hmr update /src/components/Workspace.jsx, /src/index.css
+5:28:54 PM [vite] hmr update /src/components/Workspace.jsx, /src/index.css
+5:29:32 PM [vite] hmr update /src/index.css
+5:29:47 PM [vite] hmr update /src/index.css
+5:29:56 PM [vite] hmr update /src/index.css
+5:34:22 PM [vite] hmr update /src/components/Sidebar.jsx, /src/index.css
+5:34:27 PM [vite] hmr update /src/components/Sidebar.jsx, /src/index.css
+5:34:32 PM [vite] hmr update /src/components/Sidebar.jsx, /src/index.css
+5:34:36 PM [vite] hmr update /src/components/Sidebar.jsx, /src/index.css
+5:34:44 PM [vite] hmr update /src/components/Sidebar.jsx, /src/index.css
+5:34:56 PM [vite] hmr update /src/components/Sidebar.jsx, /src/index.css
+5:35:01 PM [vite] hmr update /src/components/Sidebar.jsx, /src/index.css
+5:35:05 PM [vite] hmr update /src/components/Sidebar.jsx, /src/index.css
+5:35:19 PM [vite] hmr update /src/components/Sidebar.jsx, /src/index.css
+5:41:05 PM [vite] hmr update /src/index.css
+5:45:00 PM [vite] hmr update /src/index.css
+5:45:04 PM [vite] hmr update /src/index.css
+5:45:08 PM [vite] hmr update /src/index.css
+5:51:45 PM [vite] hmr update /src/components/ui/Modal.jsx, /src/index.css
+5:51:54 PM [vite] page reload src/components/ui/Badge.jsx
+5:52:05 PM [vite] page reload src/components/ui/Button.jsx
+5:52:23 PM [vite] hmr update /src/components/ui/Toast.jsx, /src/index.css
+5:52:31 PM [vite] hmr update /src/components/ChatPanel.jsx, /src/index.css
+5:52:45 PM [vite] hmr update /src/components/ChatPanel.jsx, /src/index.css
+5:52:49 PM [vite] hmr update /src/components/ChatPanel.jsx, /src/index.css
+5:52:59 PM [vite] hmr update /src/components/ChatPanel.jsx, /src/index.css
+5:53:03 PM [vite] hmr update /src/components/ChatPanel.jsx, /src/index.css
+5:53:07 PM [vite] hmr update /src/components/ChatPanel.jsx, /src/index.css
+5:53:14 PM [vite] hmr update /src/components/tabs/FollowUpsTab.jsx, /src/index.css
+5:53:19 PM [vite] hmr update /src/components/tabs/FollowUpsTab.jsx, /src/index.css
+5:53:24 PM [vite] hmr update /src/components/tabs/FollowUpsTab.jsx, /src/index.css
+5:53:29 PM [vite] hmr update /src/components/tabs/QuotationsTab.jsx, /src/index.css
+5:53:33 PM [vite] hmr update /src/components/tabs/QuotationsTab.jsx, /src/index.css
+5:53:46 PM [vite] hmr update /src/components/modals/EscalateModal.jsx, /src/index.css
+5:53:53 PM [vite] hmr update /src/components/modals/EscalateModal.jsx, /src/index.css
+5:54:00 PM [vite] hmr update /src/components/modals/EscalateModal.jsx, /src/index.css
+5:54:15 PM [vite] hmr update /src/index.css

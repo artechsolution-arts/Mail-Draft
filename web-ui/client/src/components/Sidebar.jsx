@@ -156,7 +156,7 @@ function CustomerRow({ customer, isActive, onClick }) {
         <span
           style={{
             display: 'block',
-            fontSize: 13,
+            fontSize: 15,
             fontWeight: 600,
             color: 'var(--text)',
             overflow: 'hidden',
@@ -170,7 +170,7 @@ function CustomerRow({ customer, isActive, onClick }) {
           <span
             style={{
               display: 'block',
-              fontSize: 11.5,
+              fontSize: 13.5,
               color: 'var(--text-3)',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
@@ -189,7 +189,7 @@ function CustomerRow({ customer, isActive, onClick }) {
           <span
             aria-label={`${pendingCount} pending follow-up${pendingCount !== 1 ? 's' : ''}`}
             style={{
-              fontSize: 10,
+              fontSize: 12,
               fontWeight: 700,
               lineHeight: 1,
               padding: '2px 5px',
@@ -206,7 +206,7 @@ function CustomerRow({ customer, isActive, onClick }) {
           <span
             aria-label={`${unreadCount} unread email${unreadCount !== 1 ? 's' : ''}`}
             style={{
-              fontSize: 10,
+              fontSize: 12,
               fontWeight: 700,
               lineHeight: 1,
               padding: '2px 5px',
@@ -343,7 +343,7 @@ export default function Sidebar({ onOpenImportModal, onOpenAddCustomerModal }) {
           <span
             style={{
               fontFamily: 'var(--font-display, Satoshi, system-ui, sans-serif)',
-              fontSize: 14,
+              fontSize: 16,
               fontWeight: 700,
               color: 'var(--text)',
               letterSpacing: '-0.01em',
@@ -360,22 +360,9 @@ export default function Sidebar({ onOpenImportModal, onOpenAddCustomerModal }) {
           <button
             onClick={handleSync}
             disabled={syncing}
+            className="sb-sync-btn"
             aria-label="Sync inbox emails"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 5,
-              fontSize: 12,
-              fontWeight: 600,
-              padding: '5px 10px',
-              borderRadius: 999,
-              background: 'var(--amber-5)',
-              color: '#fff',
-              border: 'none',
-              cursor: syncing ? 'not-allowed' : 'pointer',
-              opacity: syncing ? 0.6 : 1,
-              flexShrink: 0,
-            }}
+            style={{ cursor: syncing ? 'not-allowed' : 'pointer' }}
           >
             {syncing ? (
               <Spinner size={12} />
@@ -402,22 +389,9 @@ export default function Sidebar({ onOpenImportModal, onOpenAddCustomerModal }) {
           {/* Import */}
           <button
             onClick={onOpenImportModal}
+            className="sb-import-btn"
             aria-label="Import customers from Excel or CSV"
             title="Import customers from Excel / CSV"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 4,
-              fontSize: 12,
-              fontWeight: 600,
-              padding: '5px 9px',
-              borderRadius: 8,
-              border: '1px solid var(--border)',
-              background: 'transparent',
-              color: 'var(--text-2)',
-              cursor: 'pointer',
-              flexShrink: 0,
-            }}
           >
             <svg
               width="11"
@@ -440,24 +414,9 @@ export default function Sidebar({ onOpenImportModal, onOpenAddCustomerModal }) {
           {/* Add customer */}
           <button
             onClick={onOpenAddCustomerModal}
+            className="sb-add-btn"
             aria-label="Add customer"
             title="Add customer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: 28,
-              height: 28,
-              borderRadius: 8,
-              border: '1px solid var(--border)',
-              background: 'transparent',
-              color: 'var(--text-2)',
-              fontSize: 18,
-              lineHeight: 1,
-              cursor: 'pointer',
-              flexShrink: 0,
-              fontWeight: 400,
-            }}
           >
             +
           </button>
@@ -472,17 +431,7 @@ export default function Sidebar({ onOpenImportModal, onOpenAddCustomerModal }) {
           flexShrink: 0,
         }}
       >
-        <label
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 7,
-            padding: '5px 9px',
-            borderRadius: 8,
-            border: '1px solid var(--border)',
-            background: 'var(--bg)',
-          }}
-        >
+        <label className="sb-search-box">
           <svg
             width="12"
             height="12"
@@ -510,7 +459,7 @@ export default function Sidebar({ onOpenImportModal, onOpenAddCustomerModal }) {
               border: 'none',
               outline: 'none',
               background: 'transparent',
-              fontSize: 12.5,
+              fontSize: 14.5,
               color: 'var(--text)',
             }}
           />
@@ -521,7 +470,7 @@ export default function Sidebar({ onOpenImportModal, onOpenAddCustomerModal }) {
       <div
         style={{
           padding: '6px 14px 4px',
-          fontSize: 10.5,
+          fontSize: 12.5,
           fontWeight: 700,
           letterSpacing: '0.06em',
           textTransform: 'uppercase',
@@ -612,7 +561,7 @@ export default function Sidebar({ onOpenImportModal, onOpenAddCustomerModal }) {
             <AvatarCircle name={user.displayName || user.name} email={user.email} size={32} />
             <div style={{ flex: 1, minWidth: 0, textAlign: 'left' }}>
               <div style={{
-                fontSize: 12.5,
+                fontSize: 14.5,
                 fontWeight: 600,
                 color: 'var(--text)',
                 overflow: 'hidden',
@@ -622,7 +571,7 @@ export default function Sidebar({ onOpenImportModal, onOpenAddCustomerModal }) {
                 {user.displayName || user.name || user.email}
               </div>
               <div style={{
-                fontSize: 11,
+                fontSize: 13,
                 color: 'var(--text-3)',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',

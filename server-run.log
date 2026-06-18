@@ -1047,3 +1047,396 @@ Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=
 Making real API call: GET me/mailFolders/sentitems/messages
 Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A53%3A25.614Z
 Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A53%3A25.614Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A53%3A55.566Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A53%3A55.566Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A53%3A55.566Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A53%3A55.566Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A54%3A25.562Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A54%3A25.562Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A54%3A25.562Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A54%3A25.562Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A54%3A55.559Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A54%3A55.559Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A54%3A55.559Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A54%3A55.559Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A55%3A25.577Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A55%3A25.577Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A55%3A25.577Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A55%3A25.577Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A55%3A55.570Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A55%3A55.570Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A55%3A55.570Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A55%3A55.570Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A56%3A25.622Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A56%3A25.622Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A56%3A25.622Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A56%3A25.622Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A56%3A55.699Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A56%3A55.699Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A56%3A55.699Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A56%3A55.699Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A57%3A25.621Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A57%3A25.621Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A57%3A25.621Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A57%3A25.621Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A57%3A55.701Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A57%3A55.701Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A57%3A55.701Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A57%3A55.701Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A58%3A25.570Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A58%3A25.570Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A58%3A25.570Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A58%3A25.570Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A58%3A55.652Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A58%3A55.652Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A58%3A55.652Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A58%3A55.652Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A59%3A25.614Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A59%3A25.614Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A59%3A25.614Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A59%3A25.614Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A59%3A55.601Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T11%3A59%3A55.601Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A59%3A55.601Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T11%3A59%3A55.601Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A00%3A25.662Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A00%3A25.662Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A00%3A25.662Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A00%3A25.662Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A00%3A55.594Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A00%3A55.594Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A00%3A55.594Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A00%3A55.594Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A01%3A25.950Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A01%3A25.950Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A01%3A25.950Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A01%3A25.950Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A02%3A05.626Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A02%3A05.626Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A02%3A05.626Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A02%3A05.626Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A02%3A25.568Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A02%3A25.568Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A02%3A25.568Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A02%3A25.568Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A02%3A55.974Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A02%3A55.974Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A02%3A55.974Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A02%3A55.974Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A03%3A25.657Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A03%3A25.657Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A03%3A25.657Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A03%3A25.657Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A03%3A55.712Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A03%3A55.712Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A03%3A55.712Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A03%3A55.712Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A04%3A25.578Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A04%3A25.578Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A04%3A25.578Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A04%3A25.578Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A04%3A55.563Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A04%3A55.563Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A04%3A55.563Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A04%3A55.563Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A05%3A25.600Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A05%3A25.600Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A05%3A25.600Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A05%3A25.600Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A05%3A55.568Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A05%3A55.568Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A05%3A55.568Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A05%3A55.568Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A06%3A25.587Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A06%3A25.587Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A06%3A25.587Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A06%3A25.587Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A06%3A55.600Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A06%3A55.600Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A06%3A55.600Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A06%3A55.600Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A07%3A25.645Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A07%3A25.645Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A07%3A25.645Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A07%3A25.645Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A07%3A55.622Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A07%3A55.622Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A07%3A55.622Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A07%3A55.622Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A08%3A25.855Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A08%3A25.855Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A08%3A25.855Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A08%3A25.855Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A08%3A55.601Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A08%3A55.601Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A08%3A55.601Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A08%3A55.601Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A09%3A25.587Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A09%3A25.587Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A09%3A25.587Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A09%3A25.587Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A09%3A55.598Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A09%3A55.598Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A09%3A55.598Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A09%3A55.598Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A10%3A25.603Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A10%3A25.603Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A10%3A25.603Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A10%3A25.603Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A10%3A55.600Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A10%3A55.600Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A10%3A55.600Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A10%3A55.600Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A11%3A25.603Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A11%3A25.603Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A11%3A25.603Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A11%3A25.603Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A11%3A55.646Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A11%3A55.646Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A11%3A55.646Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A11%3A55.646Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A12%3A25.612Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A12%3A25.612Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A12%3A25.612Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A12%3A25.612Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A12%3A55.602Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A12%3A55.602Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A12%3A55.602Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A12%3A55.602Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A13%3A25.618Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A13%3A25.618Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A13%3A25.618Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A13%3A25.618Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A13%3A55.791Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A13%3A55.791Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A13%3A55.791Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A13%3A55.791Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A14%3A25.637Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A14%3A25.637Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A14%3A25.637Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A14%3A25.637Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A14%3A55.593Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A14%3A55.593Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A14%3A55.593Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A14%3A55.593Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A15%3A25.653Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A15%3A25.653Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A15%3A25.653Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A15%3A25.653Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A15%3A55.654Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A15%3A55.654Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A15%3A55.654Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A15%3A55.654Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A16%3A25.617Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A16%3A25.617Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A16%3A25.617Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A16%3A25.617Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A16%3A55.668Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A16%3A55.668Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A16%3A55.668Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A16%3A55.668Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A17%3A25.651Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A17%3A25.651Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A17%3A25.651Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A17%3A25.651Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A17%3A55.615Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A17%3A55.615Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A17%3A55.615Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A17%3A55.615Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A18%3A25.618Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A18%3A25.618Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A18%3A25.618Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A18%3A25.618Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A18%3A55.629Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A18%3A55.629Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A18%3A55.629Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A18%3A55.629Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A19%3A25.640Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A19%3A25.640Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A19%3A25.640Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A19%3A25.640Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A19%3A55.779Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A19%3A55.779Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A19%3A55.779Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A19%3A55.779Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A20%3A25.649Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A20%3A25.649Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A20%3A25.649Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A20%3A25.649Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A20%3A55.632Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A20%3A55.632Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A20%3A55.632Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A20%3A55.632Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A21%3A25.677Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A21%3A25.677Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A21%3A25.677Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A21%3A25.677Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A21%3A55.628Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A21%3A55.628Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A21%3A55.628Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A21%3A55.628Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A22%3A25.670Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A22%3A25.670Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A22%3A25.670Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A22%3A25.670Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A22%3A55.667Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A22%3A55.667Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A22%3A55.667Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A22%3A55.667Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A23%3A25.650Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A23%3A25.650Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A23%3A25.650Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A23%3A25.650Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A23%3A55.646Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A23%3A55.646Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A23%3A55.646Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A23%3A55.646Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A24%3A25.806Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A24%3A25.806Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A24%3A25.806Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A24%3A25.806Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A24%3A55.746Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A24%3A55.746Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A24%3A55.746Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A24%3A55.746Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A25%3A25.674Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A25%3A25.674Z
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A25%3A25.674Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A25%3A25.674Z
+Making real API call: GET me/mailFolders/inbox/messages
+Query string: ?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A25%3A55.767Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?%24top=50&%24orderby=receivedDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CreceivedDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20receivedDateTime%20ge%202026-06-17T12%3A25%3A55.767Z
+[sync] murali.g@artechsolution.co.in/inbox fetch error: Network error during API call: getaddrinfo ENOTFOUND graph.microsoft.com
+Making real API call: GET me/mailFolders/sentitems/messages
+Query string: ?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A25%3A55.767Z
+Full URL: https://graph.microsoft.com/v1.0/me/mailFolders/sentitems/messages?%24top=50&%24orderby=sentDateTime+desc&%24select=id%2Csubject%2Cfrom%2CtoRecipients%2CsentDateTime%2CbodyPreview%2CisDraft&$filter=isDraft%20eq%20false%20and%20sentDateTime%20ge%202026-06-17T12%3A25%3A55.767Z
+[sync] murali.g@artechsolution.co.in/sentitems fetch error: Network error during API call: getaddrinfo ENOTFOUND graph.microsoft.com
+PostgreSQL pool error: terminating connection due to unexpected postmaster exit

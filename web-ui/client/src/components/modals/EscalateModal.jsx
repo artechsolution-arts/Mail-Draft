@@ -134,9 +134,9 @@ export default function EscalateModal({ open, onClose, draft, customer, onEscala
 
         {/* Saved but no auth state */}
         {savedNoAuth && (
-          <div style={{ ...authWarningStyle, background: 'rgba(26,106,180,0.08)', borderColor: 'rgba(26,106,180,0.25)', color: '#1A6AB4' }}>
+          <div style={{ ...authWarningStyle, background: 'var(--blue-bg)', borderColor: 'var(--brand-primary)', color: 'var(--brand-primary)' }}>
             <strong>Saved</strong> — connect Outlook to send the escalation email.{' '}
-            <a href="/crm/auth/login" style={{ color: '#1A6AB4', fontWeight: 600, textDecoration: 'underline' }}>
+            <a href="/crm/auth/login" style={{ color: 'var(--brand-primary)', fontWeight: 600, textDecoration: 'underline' }}>
               Connect Outlook
             </a>
           </div>
@@ -181,9 +181,9 @@ export default function EscalateModal({ open, onClose, draft, customer, onEscala
             <div style={{ fontWeight: 700, fontSize: 13, color: 'var(--text)', marginBottom: 2 }}>
               {customer.name || '(No name)'}
             </div>
-            <div style={{ fontSize: 12, color: 'var(--text-2)' }}>{customer.email}</div>
+            <div style={{ fontSize: 12, color: 'var(--text)' }}>{customer.email}</div>
             {customer.company && (
-              <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 1 }}>{customer.company}</div>
+              <div style={{ fontSize: 12, color: 'var(--text-2)', marginTop: 1 }}>{customer.company}</div>
             )}
             {emailCount > 0 && (
               <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 4 }}>
@@ -213,35 +213,35 @@ export default function EscalateModal({ open, onClose, draft, customer, onEscala
 // ── Styles ──────────────────────────────────────────────────────────────────
 
 const infoBannerStyle = {
-  background: 'rgba(61,199,179,0.08)',
-  border: '1px solid rgba(61,199,179,0.25)',
+  background: 'rgba(61,199,179,0.10)',
+  border: '1px solid rgba(61,199,179,0.30)',
   borderRadius: 8,
   padding: '12px 14px',
   marginBottom: 20,
   fontSize: 12.5,
-  color: '#0e7166',
+  color: 'var(--text-2)',
   lineHeight: 1.6,
 };
 
 const authWarningStyle = {
-  background: '#fee2e2',
-  border: '1px solid #fca5a5',
+  background: 'var(--red-bg)',
+  border: '1px solid var(--red-7)',
   borderRadius: 8,
   padding: '12px 16px',
   marginBottom: 16,
   fontSize: 12.5,
-  color: '#991b1b',
+  color: 'var(--red-7)',
   lineHeight: 1.6,
 };
 
 const authLinkStyle = {
-  color: '#b91c1c',
+  color: 'var(--red-7)',
   fontWeight: 600,
   textDecoration: 'underline',
 };
 
 const customerPreviewStyle = {
-  background: 'var(--stone-50, #f7f5f2)',
+  background: 'var(--bg-panel)',
   border: '1px solid var(--border)',
   borderRadius: 8,
   padding: '12px 14px',
@@ -252,9 +252,9 @@ const customerPreviewStyle = {
 const errorBannerStyle = {
   padding: '10px 14px',
   borderRadius: 8,
-  background: 'oklch(96% .030 25)',
-  border: '1px solid oklch(88% .060 25)',
-  color: 'oklch(42% .100 25)',
+  background: 'var(--red-bg)',
+  border: '1px solid var(--red-7)',
+  color: 'var(--red-7)',
   fontSize: 13,
   marginBottom: 8,
 };

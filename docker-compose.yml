@@ -1,24 +1,7 @@
 # Single command to start everything: docker compose up --build
-# On a new PC: copy .env.example → .env, fill in MS credentials, then run above.
+# Uses the host machine's local PostgreSQL 17 instead of a containerised DB.
 
 services:
-
-  # ── PostgreSQL ─────────────────────────────────────────────────────────────
-  postgres:
-    image: postgres:16-alpine
-    environment:
-      POSTGRES_DB:       ${PGDATABASE:-outlook_crm}
-      POSTGRES_USER:     ${PGUSER:-postgres}
-      POSTGRES_PASSWORD: ${PGPASSWORD:-changeme}
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${PGUSER:-postgres}"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
-    restart: unless-stopped
 
   # ── Ollama (local LLM) ─────────────────────────────────────────────────────
   ollama:
@@ -63,13 +46,14 @@ services:
     env_file: .env
     environment:
       NODE_ENV:     production
-      DATABASE_URL: postgresql://${PGUSER:-postgres}:${PGPASSWORD:-changeme}@postgres:5432/${PGDATABASE:-outlook_crm}
+      DATABASE_URL: postgresql://${PGUSER:-postgres}:${PGPASSWORD:-changeme}@host.docker.internal:5432/${PGDATABASE:-outlook_crm}
       OLLAMA_URL:   http://ollama:11434
+      REDIRECT_URI: https://localhost:3000/crm/auth/callback
     depends_on:
-      postgres:
-        condition: service_healthy
       ollama-init:
         condition: service_completed_successfully
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://localhost:3000/api/status || exit 1"]
       interval: 30s
@@ -85,11 +69,11 @@ services:
     ports:
       - "3333:3333"
     env_file: .env
-    depends_on:
-      postgres:
-        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://${PGUSER:-postgres}:${PGPASSWORD:-changeme}@host.docker.internal:5432/${PGDATABASE:-outlook_crm}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     restart: unless-stopped
 
 volumes:
-  pgdata:       # PostgreSQL data — persists across restarts
   ollama_data:  # Ollama models — persists across restarts (~2GB for llama3.2:3b)

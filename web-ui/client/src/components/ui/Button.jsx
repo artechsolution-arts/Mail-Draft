@@ -10,29 +10,29 @@ import Spinner from './Spinner';
 
 const VARIANT_STYLES = {
   primary: {
-    background: '#1A6AB4',
+    background: 'var(--brand-primary)',
     color: '#fff',
-    border: '1px solid #155a97',
+    border: '1px solid var(--brand-primary-dark)',
   },
   ghost: {
     background: 'transparent',
-    color: 'oklch(0.400 0.013 68)',
-    border: '1px solid oklch(0.910 0.011 68)',
+    color: 'var(--text-2)',
+    border: '1px solid var(--border)',
   },
   danger: {
-    background: 'oklch(0.930 0.034 25)',
-    color: 'oklch(0.440 0.165 25)',
-    border: '1px solid oklch(0.930 0.034 25)',
+    background: 'var(--red-bg)',
+    color: 'var(--red-7)',
+    border: '1px solid var(--red-7)',
   },
   warn: {
     background: 'rgba(61,199,179,0.12)',
-    color: '#31a593',
+    color: 'var(--brand-teal-dark)',
     border: '1px solid rgba(61,199,179,0.30)',
   },
   success: {
-    background: 'rgba(45,179,122,0.12)',
-    color: '#2DB37A',
-    border: '1px solid rgba(45,179,122,0.30)',
+    background: 'var(--green-bg)',
+    color: 'var(--green-7)',
+    border: '1px solid var(--green-7)',
   },
 };
 

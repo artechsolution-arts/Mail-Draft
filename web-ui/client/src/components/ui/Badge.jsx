@@ -8,32 +8,32 @@ import React from 'react';
 
 const VARIANT_STYLES = {
   pending: {
-    background: 'rgba(26,106,180,0.10)',
-    color:      '#1A6AB4',
+    background: 'var(--blue-bg)',
+    color:      'var(--brand-primary)',
   },
   sent: {
-    background: 'rgba(45,179,122,0.14)',
-    color:      '#2DB37A',
+    background: 'var(--green-bg)',
+    color:      'var(--green-7)',
   },
   success: {
-    background: 'rgba(45,179,122,0.14)',
-    color:      '#2DB37A',
+    background: 'var(--green-bg)',
+    color:      'var(--green-7)',
   },
   rejected: {
-    background: 'oklch(0.930 0.034 25)',  // --red-100
-    color:      'oklch(0.440 0.165 25)',  // --red-700
+    background: 'var(--red-bg)',
+    color:      'var(--red-7)',
   },
   error: {
-    background: 'oklch(0.930 0.034 25)',  // --red-100
-    color:      'oklch(0.440 0.165 25)',  // --red-700
+    background: 'var(--red-bg)',
+    color:      'var(--red-7)',
   },
   escalated: {
-    background: 'oklch(0.930 0.034 240)', // --blue-100
-    color:      'oklch(0.440 0.140 240)', // --blue-700
+    background: 'var(--blue-bg)',
+    color:      'var(--blue-7)',
   },
   generating: {
-    background: 'oklch(0.958 0.007 68)',  // --stone-100
-    color:      'oklch(0.400 0.013 68)',  // --stone-700
+    background: 'var(--bg-panel)',
+    color:      'var(--text-3)',
   },
 };
 
