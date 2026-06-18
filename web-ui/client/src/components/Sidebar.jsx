@@ -349,8 +349,8 @@ export default function Sidebar({ onOpenImportModal, onOpenAddCustomerModal }) {
               letterSpacing: '-0.01em',
             }}
           >
-            Mail Draft{' '}
-            <span style={{ color: 'var(--amber-5)', fontWeight: 800 }}>CRM</span>
+            Mail{' '}
+            <span style={{ color: 'var(--amber-5)', fontWeight: 800 }}>Assistant</span>
           </span>
         </div>
 

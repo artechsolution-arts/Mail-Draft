@@ -353,8 +353,17 @@ app.post('/api/crm/customers/:customerEmail/send-email',
 );
 
 app.get('/api/crm/customers', async (req, res) => {
-  try { res.json(await crmStorage.listCustomers(req.session.userEmail)); }
-  catch (e) { res.status(500).json({ error: e.message }); }
+  try {
+    const excludedDomains = new Set(
+      (process.env.EXCLUDED_DOMAINS || 'artechsolution.co.in').toLowerCase().split(',').map(d => d.trim())
+    );
+    const all = await crmStorage.listCustomers(req.session.userEmail);
+    const filtered = all.filter(c => {
+      const domain = (c.email || '').toLowerCase().split('@')[1] || '';
+      return !excludedDomains.has(domain);
+    });
+    res.json(filtered);
+  } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
 app.get('/api/crm/customers/:email', async (req, res) => {
@@ -487,7 +496,7 @@ app.patch('/api/crm/drafts/:id', async (req, res) => {
   catch (e) { res.status(400).json({ error: e.message }); }
 });
 
-// ── Re-generate a draft with Ollama ──────────────────────────────────────────
+// ── Re-generate a draft with OpenAI ──────────────────────────────────────────
 app.post('/api/crm/drafts/:id/regenerate', async (req, res) => {
   try {
     const ue    = req.session.userEmail;
@@ -504,10 +513,10 @@ app.post('/api/crm/drafts/:id/regenerate', async (req, res) => {
     // Fire-and-forget regeneration
     (async () => {
       try {
-        const ollama   = require('../crm/ollama');
+        const openai   = require('../crm/openai');
         const user     = await crmStorage.getUser(ue);
         const customer = await crmStorage.getCustomer(ue, draft.customerEmail);
-        const result   = await ollama.generateEmailDraft({
+        const result   = await openai.generateEmailDraft({
           senderName:      user?.name || ue,
           customer:        { email: draft.customerEmail, name: draft.customerName || '', company: customer?.company || '' },
           receivedSubject: draft.sourceSubject || draft.subject || '',
@@ -516,11 +525,11 @@ app.post('/api/crm/drafts/:id/regenerate', async (req, res) => {
           sentEmails:      customer?.sentEmails || [],
         });
         await crmStorage.updateDraft(ue, draft.id, {
-          body: result.body, generatedBy: 'ollama',
+          body: result.body, generatedBy: 'openai',
           ollamaModel: result.model, generationStatus: 'pending',
         });
       } catch (err) {
-        console.error('[regenerate] Ollama error:', err.message);
+        console.error('[regenerate] OpenAI error:', err.message);
         await crmStorage.updateDraft(ue, draft.id, {
           body: '(AI generation failed — please write your reply manually)',
           generationStatus: 'failed',
@@ -553,13 +562,13 @@ app.post('/api/crm/process-email', async (req, res) => {
     // Respond immediately — UI will refresh when generation completes
     res.json(draft);
 
-    // Fire-and-forget Ollama draft generation
+    // Fire-and-forget OpenAI draft generation
     (async () => {
       try {
-        const ollama   = require('../crm/ollama');
+        const openai   = require('../crm/openai');
         const user     = await crmStorage.getUser(ue);
         const customer = await crmStorage.getCustomer(ue, customerEmail);
-        const result   = await ollama.generateEmailDraft({
+        const result   = await openai.generateEmailDraft({
           senderName:      user?.name || ue,
           customer:        { email: customerEmail, name: customerName || customer?.name || '', company: customer?.company || '' },
           receivedSubject: subject || '',
@@ -569,12 +578,12 @@ app.post('/api/crm/process-email', async (req, res) => {
         });
         await crmStorage.updateDraft(ue, draft.id, {
           body:             result.body,
-          generatedBy:      'ollama',
+          generatedBy:      'openai',
           ollamaModel:      result.model,
           generationStatus: 'pending',
         });
       } catch (err) {
-        console.error('Ollama draft generation failed for draft', draft.id, ':', err.message);
+        console.error('OpenAI draft generation failed for draft', draft.id, ':', err.message);
         await crmStorage.updateDraft(ue, draft.id, {
           body:             '(AI generation failed — please write your reply manually)',
           generationStatus: 'failed',
@@ -1194,58 +1203,23 @@ app.post('/api/crm/chat', requireAuth, async (req, res) => {
   const { message, messages = [], customerEmail } = req.body;
   if (!message) return res.status(400).json({ error: 'message is required' });
 
-  const ollama  = require('../crm/ollama');
-  const ollamaUrl   = process.env.OLLAMA_URL  || 'http://localhost:11434';
-  const ollamaModel = process.env.OLLAMA_MODEL || 'llama3.2:3b';
+  const openaiMod = require('../crm/openai');
   const ue = req.session.userEmail;
 
   try {
-    // Resolve customer from message or explicit param
-    const emailInMsg = message.match(/[\w.+-]+@[\w-]+\.\w+/)?.[0]?.toLowerCase();
+    const emailInMsg    = message.match(/[\w.+-]+@[\w-]+\.\w+/)?.[0]?.toLowerCase();
     const targetCustomer = customerEmail || emailInMsg || null;
+    const systemPrompt  = await buildSystemPrompt(ue, targetCustomer);
+    const history       = messages.map(m => ({ role: m.role, content: m.content }));
 
-    const systemPrompt = await buildSystemPrompt(ue, targetCustomer);
-
-    // Build conversation history for multi-turn
-    const history = messages.map(m => ({ role: m.role, content: m.content }));
-
-    const payload = {
-      model:  ollamaModel,
-      stream: false,
-      options: { temperature: 0.4, num_ctx: 8192 },
-      messages: [
-        { role: 'system', content: systemPrompt },
-        ...history,
-        { role: 'user',   content: message },
-      ],
-    };
-
-    const reply = await new Promise((resolve, reject) => {
-      const body = JSON.stringify(payload);
-      const u    = new URL(ollamaUrl);
-      const req2 = http.request({
-        hostname: u.hostname, port: u.port || 11434,
-        path: '/api/chat', method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) },
-        timeout: 120000,
-      }, r => {
-        let d = '';
-        r.on('data', c => d += c);
-        r.on('end', () => {
-          try { resolve(JSON.parse(d)); }
-          catch { reject(new Error('Invalid JSON from Ollama: ' + d.slice(0, 200))); }
-        });
-      });
-      req2.on('error', reject);
-      req2.on('timeout', () => { req2.destroy(); reject(new Error('Ollama request timed out')); });
-      req2.write(body); req2.end();
-    });
-
-    const content = reply.message?.content || reply.response || '';
-    res.json({ content, model: ollamaModel });
+    const content = await openaiMod.chat(
+      [...history, { role: 'user', content: message }],
+      systemPrompt
+    );
+    res.json({ content, model: openaiMod.OPENAI_MODEL });
   } catch (e) {
     console.error('CRM chat error:', e.message);
-    res.status(500).json({ error: e.message, hint: 'Make sure Ollama is running: ollama serve' });
+    res.status(500).json({ error: e.message });
   }
 });
 

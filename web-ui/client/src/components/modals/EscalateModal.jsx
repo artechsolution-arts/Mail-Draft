@@ -109,7 +109,7 @@ export default function EscalateModal({ open, onClose, draft, customer, onEscala
     <Modal
       open={open}
       onClose={onClose}
-      title="Escalate Customer"
+      title="Delegate Customer"
       maxWidth="sm"
     >
       <form onSubmit={handleSend} noValidate className="modal-form">
@@ -145,7 +145,7 @@ export default function EscalateModal({ open, onClose, draft, customer, onEscala
         {/* Escalate To */}
         <div className="mf-field">
           <label htmlFor="esc-to">
-            Escalate To <span aria-hidden="true" style={{ color: 'var(--red-7)', fontWeight: 400 }}>*</span>
+            Delegate To <span aria-hidden="true" style={{ color: 'var(--red-7)', fontWeight: 400 }}>*</span>
           </label>
           <input
             id="esc-to"

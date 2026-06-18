@@ -7,6 +7,10 @@ const crmStorage = require('./storage');
 const SYNC_INTERVAL_MS = parseInt(process.env.SYNC_INTERVAL_MS || '30000', 10);
 const FIRST_SYNC_DAYS  = parseInt(process.env.FIRST_SYNC_DAYS  || '30', 10);
 
+const EXCLUDED_DOMAINS = new Set(
+  (process.env.EXCLUDED_DOMAINS || 'artechsolution.co.in').toLowerCase().split(',').map(d => d.trim())
+);
+
 // ── SSE clients: userEmail -> Set<res> ────────────────────────────────────
 const sseClients = new Map();
 
@@ -104,7 +108,7 @@ function stripHtml(html) {
 // ── Sync one folder (inbox or sentitems) ──────────────────────────────────
 async function syncFolder(userEmail, token, folder, lastSync, customerMap, existingIds) {
   const { callGraphAPI } = require('../utils/graph-api');
-  const ollama = require('./ollama');
+  const openai = require('./openai');
   const isInbox   = folder === 'inbox';
   const direction = isInbox ? 'received' : 'sent';
   const dateField = isInbox ? 'receivedDateTime' : 'sentDateTime';
@@ -136,13 +140,23 @@ async function syncFolder(userEmail, token, folder, lastSync, customerMap, exist
     let customerEmail = null;
     if (isInbox) {
       customerEmail = (msg.from?.emailAddress?.address || '').toLowerCase().trim();
+      if (!customerEmail) continue;
+      // Skip internal domain emails
+      const domain = customerEmail.split('@')[1] || '';
+      if (EXCLUDED_DOMAINS.has(domain)) continue;
+      // Auto-create customer if new
+      if (!customerMap.has(customerEmail)) {
+        const senderName = msg.from?.emailAddress?.name || '';
+        await crmStorage.upsertCustomer(userEmail, { email: customerEmail, name: senderName });
+        customerMap.set(customerEmail, { email: customerEmail, name: senderName });
+      }
     } else {
       for (const r of (msg.toRecipients || [])) {
         const addr = (r.emailAddress?.address || '').toLowerCase().trim();
         if (customerMap.has(addr)) { customerEmail = addr; break; }
       }
+      if (!customerEmail) continue;
     }
-    if (!customerEmail || !customerMap.has(customerEmail)) continue;
 
     const customer     = customerMap.get(customerEmail);
     const customerName = customer.name || msg.from?.emailAddress?.name || '';
@@ -178,20 +192,20 @@ async function syncFolder(userEmail, token, folder, lastSync, customerMap, exist
         try {
           const user     = await crmStorage.getUser(userEmail);
           const custFull = await crmStorage.getCustomer(userEmail, ce);
-          const result   = await ollama.generateEmailDraft({
+          const result   = await openai.generateEmailDraft({
             senderName:      user?.name || userEmail,
             customer:        { email: ce, name: cn, company: custFull?.company || '' },
             receivedSubject: sub, receivedBody: b,
             notes:           custFull?.notes || [], sentEmails: custFull?.sentEmails || [],
           });
           await crmStorage.updateDraft(userEmail, d.id, {
-            body: result.body, generatedBy: 'ollama',
+            body: result.body, generatedBy: 'openai',
             ollamaModel: result.model, generationStatus: 'pending',
           });
           console.log(`[sync] Draft ready for ${ce} — "${sub.slice(0,40)}"`);
           notifyUser(userEmail, { type: 'draft_ready', draftId: d.id, customerEmail: ce });
         } catch (err) {
-          console.error('[sync] Ollama draft error:', err.message);
+          console.error('[sync] OpenAI draft error:', err.message);
           await crmStorage.updateDraft(userEmail, d.id, {
             body: '(AI generation failed — please write manually)',
             generationStatus: 'failed',
@@ -209,7 +223,7 @@ async function syncFolder(userEmail, token, folder, lastSync, customerMap, exist
 
 // ── Backfill: generate drafts for received emails that have none ──────────
 async function backfillDrafts(userEmail) {
-  const ollama = require('./ollama');
+  const openai = require('./openai');
 
   // Find received emails from known customers that have NO draft yet
   const { rows: missing } = await query(`
@@ -254,7 +268,7 @@ async function backfillDrafts(userEmail) {
       try {
         const user     = await crmStorage.getUser(userEmail);
         const custFull = await crmStorage.getCustomer(userEmail, ce);
-        const result   = await ollama.generateEmailDraft({
+        const result   = await openai.generateEmailDraft({
           senderName:      user?.name || userEmail,
           customer:        { email: ce, name: cn, company: custFull?.company || '' },
           receivedSubject: subject,
@@ -263,13 +277,13 @@ async function backfillDrafts(userEmail) {
           sentEmails:      custFull?.sentEmails || [],
         });
         await crmStorage.updateDraft(userEmail, d.id, {
-          body: result.body, generatedBy: 'ollama',
+          body: result.body, generatedBy: 'openai',
           ollamaModel: result.model, generationStatus: 'pending',
         });
         console.log(`[backfill] Draft ready for ${ce} — "${subject.slice(0, 40)}"`);
         notifyUser(userEmail, { type: 'draft_ready', draftId: d.id, customerEmail: ce });
       } catch (err) {
-        console.error('[backfill] Ollama error:', err.message);
+        console.error('[backfill] OpenAI error:', err.message);
         await crmStorage.updateDraft(userEmail, d.id, {
           body: '(AI generation failed — please write manually)',
           generationStatus: 'failed',

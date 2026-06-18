@@ -215,19 +215,19 @@ router.post('/customers/:email/emails/inbound', async (req, res) => {
         sourceBody:       body || '',
         generationStatus: 'generating',
       });
-      // Fire-and-forget Ollama generation
+      // Fire-and-forget OpenAI generation
       (async (d) => {
         try {
-          const ollama   = require('./ollama');
+          const openai   = require('./openai');
           const user     = await crmStorage.getUser(req.apiUser);
           const custFull = await crmStorage.getCustomer(req.apiUser, ce);
-          const result   = await ollama.generateEmailDraft({
+          const result   = await openai.generateEmailDraft({
             senderName:      user?.name || req.apiUser,
             customer:        { email: ce, name: custFull?.name || '', company: custFull?.company || '' },
             receivedSubject: subject, receivedBody: body || '',
             notes:           custFull?.notes || [], sentEmails: custFull?.sentEmails || [],
           });
-          await crmStorage.updateDraft(req.apiUser, d.id, { body: result.body, generatedBy: 'ollama', ollamaModel: result.model, generationStatus: 'pending' });
+          await crmStorage.updateDraft(req.apiUser, d.id, { body: result.body, generatedBy: 'openai', ollamaModel: result.model, generationStatus: 'pending' });
         } catch (err) {
           await crmStorage.updateDraft(req.apiUser, d.id, { body: '(AI generation failed)', generationStatus: 'failed' }).catch(() => {});
         }

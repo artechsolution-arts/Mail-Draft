@@ -284,7 +284,7 @@ export default function Workspace() {
               className="action-card ac-escalate"
               onClick={() => setShowEscalate(true)}
               type="button"
-              aria-label="Escalate customer"
+              aria-label="Delegate customer"
             >
               <div className="action-icon-circle ac-escalate">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -293,7 +293,7 @@ export default function Workspace() {
                   <line x1="12" y1="17" x2="12.01" y2="17"/>
                 </svg>
               </div>
-              <span className="action-label">Escalate</span>
+              <span className="action-label">Delegate</span>
             </button>
             <button
               className="action-card ac-compose"
