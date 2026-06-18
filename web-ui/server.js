@@ -33,6 +33,9 @@ const upload = multer({
 
 const app = express();
 
+// Trust Railway / Render / Heroku reverse proxy so secure cookies work over HTTPS
+app.set('trust proxy', 1);
+
 // ── Security headers ──────────────────────────────────────────────────────────
 app.use(helmet({
   contentSecurityPolicy: {
@@ -79,16 +82,16 @@ const v1Router                    = require('../crm/v1-router');
 // ── Session ───────────────────────────────────────────────────────────────────
 app.use(session({
   store: new PgSession({ pool, tableName: 'session', createTableIfMissing: true }),
-  secret: process.env.SESSION_SECRET || (process.env.NODE_ENV === 'production'
+  secret: process.env.SESSION_SECRET || ((process.env.NODE_ENV === 'production' || process.env.RAILWAY_ENVIRONMENT)
     ? (() => { console.error('FATAL: SESSION_SECRET must be set in production'); process.exit(1); })()
     : 'dev-only-insecure-secret'),
   resave: false,
   saveUninitialized: false,
-  cookie: { httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production', maxAge: 7 * 24 * 60 * 60 * 1000 },
+  cookie: { httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production' || !!process.env.RAILWAY_ENVIRONMENT, maxAge: 7 * 24 * 60 * 60 * 1000 },
 }));
 
 // ── Auth helpers ──────────────────────────────────────────────────────────────
-const PORT             = process.env.WEB_UI_PORT    || 3000;
+const PORT             = process.env.PORT || process.env.WEB_UI_PORT || 3000;
 const MS_CLIENT_ID     = process.env.MS_CLIENT_ID   || process.env.OUTLOOK_CLIENT_ID     || '';
 const MS_CLIENT_SECRET = process.env.MS_CLIENT_SECRET || process.env.OUTLOOK_CLIENT_SECRET || '';
 const MS_TENANT_ID     = process.env.MS_TENANT_ID   || 'common';
@@ -476,6 +479,49 @@ app.get('/api/crm/drafts', async (req, res) => {
 app.patch('/api/crm/drafts/:id', async (req, res) => {
   try { res.json(await crmStorage.updateDraft(req.session.userEmail, req.params.id, req.body)); }
   catch (e) { res.status(400).json({ error: e.message }); }
+});
+
+// ── Re-generate a draft with Ollama ──────────────────────────────────────────
+app.post('/api/crm/drafts/:id/regenerate', async (req, res) => {
+  try {
+    const ue    = req.session.userEmail;
+    const draft = await crmStorage.getDraft(ue, req.params.id);
+    if (!draft) return res.status(404).json({ error: 'Draft not found' });
+    if (draft.status === 'sent') return res.status(400).json({ error: 'Draft already sent' });
+
+    // Mark as generating immediately so the UI shows the spinner
+    const updated = await crmStorage.updateDraft(ue, draft.id, {
+      generationStatus: 'generating', body: '',
+    });
+    res.json(updated);
+
+    // Fire-and-forget regeneration
+    (async () => {
+      try {
+        const ollama   = require('../crm/ollama');
+        const user     = await crmStorage.getUser(ue);
+        const customer = await crmStorage.getCustomer(ue, draft.customerEmail);
+        const result   = await ollama.generateEmailDraft({
+          senderName:      user?.name || ue,
+          customer:        { email: draft.customerEmail, name: draft.customerName || '', company: customer?.company || '' },
+          receivedSubject: draft.sourceSubject || draft.subject || '',
+          receivedBody:    draft.sourceBody || '',
+          notes:           customer?.notes || [],
+          sentEmails:      customer?.sentEmails || [],
+        });
+        await crmStorage.updateDraft(ue, draft.id, {
+          body: result.body, generatedBy: 'ollama',
+          ollamaModel: result.model, generationStatus: 'pending',
+        });
+      } catch (err) {
+        console.error('[regenerate] Ollama error:', err.message);
+        await crmStorage.updateDraft(ue, draft.id, {
+          body: '(AI generation failed — please write your reply manually)',
+          generationStatus: 'failed',
+        }).catch(() => {});
+      }
+    })();
+  } catch (e) { res.status(400).json({ error: e.message }); }
 });
 
 app.post('/api/crm/process-email', async (req, res) => {

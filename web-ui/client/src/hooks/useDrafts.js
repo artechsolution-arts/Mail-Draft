@@ -1,20 +1,20 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
-const POLL_INTERVAL_MS = 5000;
+const POLL_INTERVAL_MS = 3000;
 
 /**
  * Custom hook that fetches draft emails from /api/crm/drafts and filters
- * them by customerEmail. When any draft has generationStatus === 'generating'
- * the hook polls every 5 s automatically.
+ * them by customerEmail. Polls while any draft is generating and listens
+ * for SSE draft_ready / draft_generating events for instant updates.
  *
- * @param {string} customerEmail - The customer email address to filter by.
+ * @param {string} customerEmail
  * @returns {{ drafts: Array, loading: boolean, reload: Function }}
  */
 export function useDrafts(customerEmail) {
-  const [allDrafts, setAllDrafts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const pollTimerRef = useRef(null);
-  const mountedRef = useRef(true);
+  const [allDrafts, setAllDrafts]   = useState([]);
+  const [loading, setLoading]       = useState(false);
+  const pollTimerRef                = useRef(null);
+  const mountedRef                  = useRef(true);
 
   const fetchDrafts = useCallback(async () => {
     setLoading(true);
@@ -26,35 +26,31 @@ export function useDrafts(customerEmail) {
         setAllDrafts(Array.isArray(data) ? data : []);
       }
     } catch (err) {
-      // Keep existing drafts on error; caller can inspect loading state
       console.error('[useDrafts] fetch error:', err);
     } finally {
       if (mountedRef.current) setLoading(false);
     }
   }, []);
 
-  // Derive the filtered list
+  // Derive filtered list — case-insensitive match
   const drafts = customerEmail
-    ? allDrafts.filter((d) => d.customerEmail === customerEmail)
+    ? allDrafts.filter(
+        (d) => (d.customerEmail || '').toLowerCase() === customerEmail.toLowerCase()
+      )
     : allDrafts;
 
-  // Determine whether any draft in the filtered set is still generating
-  const hasGenerating = drafts.some((d) => d.generationStatus === 'generating');
+  // Any draft still generating? → poll
+  const hasGenerating = allDrafts.some((d) => d.generationStatus === 'generating');
 
-  // Schedule/cancel polling based on generationStatus
+  // Poll while generating
   useEffect(() => {
+    if (!hasGenerating) return;
     function scheduleNext() {
       pollTimerRef.current = setTimeout(async () => {
         await fetchDrafts();
-        // After the fetch, the effect will re-run if hasGenerating changed,
-        // so we don't need to call scheduleNext() here — the effect handles it.
       }, POLL_INTERVAL_MS);
     }
-
-    if (hasGenerating) {
-      scheduleNext();
-    }
-
+    scheduleNext();
     return () => {
       if (pollTimerRef.current !== null) {
         clearTimeout(pollTimerRef.current);
@@ -63,14 +59,33 @@ export function useDrafts(customerEmail) {
     };
   }, [hasGenerating, fetchDrafts]);
 
-  // Initial fetch on mount
+  // Initial fetch
   useEffect(() => {
     mountedRef.current = true;
     fetchDrafts();
+    return () => { mountedRef.current = false; };
+  }, [fetchDrafts]);
 
-    return () => {
-      mountedRef.current = false;
-    };
+  // SSE: auto-refresh when server pushes draft_ready / draft_generating
+  useEffect(() => {
+    let es;
+    try {
+      es = new EventSource('/api/crm/stream');
+      es.onmessage = (e) => {
+        try {
+          const msg = JSON.parse(e.data);
+          if (
+            msg.type === 'draft_ready' ||
+            msg.type === 'draft_generating' ||
+            msg.type === 'draft_failed' ||
+            msg.type === 'sync'
+          ) {
+            fetchDrafts();
+          }
+        } catch {}
+      };
+    } catch {}
+    return () => { es?.close(); };
   }, [fetchDrafts]);
 
   return { drafts, loading, reload: fetchDrafts };

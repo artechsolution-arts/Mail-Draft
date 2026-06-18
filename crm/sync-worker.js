@@ -188,12 +188,15 @@ async function syncFolder(userEmail, token, folder, lastSync, customerMap, exist
             body: result.body, generatedBy: 'ollama',
             ollamaModel: result.model, generationStatus: 'pending',
           });
+          console.log(`[sync] Draft ready for ${ce} — "${sub.slice(0,40)}"`);
+          notifyUser(userEmail, { type: 'draft_ready', draftId: d.id, customerEmail: ce });
         } catch (err) {
           console.error('[sync] Ollama draft error:', err.message);
           await crmStorage.updateDraft(userEmail, d.id, {
             body: '(AI generation failed — please write manually)',
             generationStatus: 'failed',
           }).catch(() => {});
+          notifyUser(userEmail, { type: 'draft_failed', draftId: d.id, customerEmail: ce });
         }
       })(draft, subject, body, customerEmail, customerName);
     }
@@ -202,6 +205,79 @@ async function syncFolder(userEmail, token, folder, lastSync, customerMap, exist
   }
 
   return processed;
+}
+
+// ── Backfill: generate drafts for received emails that have none ──────────
+async function backfillDrafts(userEmail) {
+  const ollama = require('./ollama');
+
+  // Find received emails from known customers that have NO draft yet
+  const { rows: missing } = await query(`
+    SELECT e.id, e.customer_email, e.subject, e.body, e.outlook_id,
+           c.name AS customer_name
+    FROM crm_emails e
+    JOIN crm_customers c ON c.user_email = e.user_email AND c.email = e.customer_email
+    LEFT JOIN crm_drafts d ON d.user_email = e.user_email AND d.in_reply_to = e.outlook_id
+    WHERE e.user_email = $1
+      AND e.direction  = 'received'
+      AND e.outlook_id IS NOT NULL
+      AND d.id IS NULL
+    ORDER BY e.email_date DESC
+    LIMIT 5
+  `, [userEmail.toLowerCase()]);
+
+  if (!missing.length) return;
+
+  console.log(`[sync] Backfilling ${missing.length} draft(s) for ${userEmail}`);
+
+  for (const row of missing) {
+    const subject = row.subject || '';
+    const body    = row.body    || '';
+    const ce      = row.customer_email;
+    const cn      = row.customer_name || '';
+
+    const draft = await crmStorage.addDraft(userEmail, {
+      customerEmail:    ce,
+      customerName:     cn,
+      inReplyTo:        row.outlook_id,
+      subject:          subject.startsWith('Re:') ? subject : `Re: ${subject}`,
+      body:             '',
+      sourceSubject:    subject,
+      sourceBody:       body,
+      generationStatus: 'generating',
+    });
+
+    notifyUser(userEmail, { type: 'draft_generating', draftId: draft.id, customerEmail: ce });
+
+    // Generate asynchronously — don't block the loop
+    (async (d) => {
+      try {
+        const user     = await crmStorage.getUser(userEmail);
+        const custFull = await crmStorage.getCustomer(userEmail, ce);
+        const result   = await ollama.generateEmailDraft({
+          senderName:      user?.name || userEmail,
+          customer:        { email: ce, name: cn, company: custFull?.company || '' },
+          receivedSubject: subject,
+          receivedBody:    body,
+          notes:           custFull?.notes || [],
+          sentEmails:      custFull?.sentEmails || [],
+        });
+        await crmStorage.updateDraft(userEmail, d.id, {
+          body: result.body, generatedBy: 'ollama',
+          ollamaModel: result.model, generationStatus: 'pending',
+        });
+        console.log(`[backfill] Draft ready for ${ce} — "${subject.slice(0, 40)}"`);
+        notifyUser(userEmail, { type: 'draft_ready', draftId: d.id, customerEmail: ce });
+      } catch (err) {
+        console.error('[backfill] Ollama error:', err.message);
+        await crmStorage.updateDraft(userEmail, d.id, {
+          body: '(AI generation failed — please write manually)',
+          generationStatus: 'failed',
+        }).catch(() => {});
+        notifyUser(userEmail, { type: 'draft_failed', draftId: d.id, customerEmail: ce });
+      }
+    })(draft);
+  }
 }
 
 // ── Sync one user ─────────────────────────────────────────────────────────
@@ -237,6 +313,9 @@ async function syncUser(userEmail, msConfig) {
       console.log(`[sync] ${userEmail}: +${inboxCount} received, +${sentCount} sent`);
       notifyUser(userEmail, { type: 'sync', inbox: inboxCount, sent: sentCount });
     }
+
+    // Backfill: generate drafts for any received emails that don't have one yet
+    await backfillDrafts(userEmail);
   } catch (err) {
     console.error(`[sync] Error syncing ${userEmail}:`, err.message);
   }

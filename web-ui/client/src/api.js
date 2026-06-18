@@ -86,6 +86,10 @@ export async function sendDraft(id, formData) {
   return request('POST', `/api/crm/drafts/${id}/send`, formData, true);
 }
 
+export async function regenerateDraft(id) {
+  return request('POST', `/api/crm/drafts/${id}/regenerate`);
+}
+
 export async function escalateDraft(id, { escalateTo, note }) {
   return request('POST', `/api/crm/drafts/${id}/escalate`, { escalateTo, note });
 }

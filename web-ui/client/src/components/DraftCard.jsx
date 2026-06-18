@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import Spinner from './ui/Spinner.jsx';
-import { updateDraft, sendDraft } from '../api.js';
+import { updateDraft, sendDraft, regenerateDraft } from '../api.js';
 import { useApp } from '../context/AppContext.jsx';
 
 /**
@@ -17,6 +17,7 @@ export default function DraftCard({ draft, onRefresh }) {
   const [editMode, setEditMode] = useState(false);
   const [editedBody, setEditedBody] = useState(draft.body || '');
   const [sending, setSending] = useState(false);
+  const [generating, setGenerating] = useState(false);
 
   const fileInputRef = useRef(null);
   const [attachedFiles, setAttachedFiles] = useState([]);
@@ -100,9 +101,30 @@ export default function DraftCard({ draft, onRefresh }) {
     }
   }
 
+  // ── Regenerate with Ollama ───────────────────────────────────────────────
+
+  async function handleGenerate() {
+    setGenerating(true);
+    try {
+      await regenerateDraft(draft.id);
+      // Poll until no longer generating
+      let attempts = 0;
+      const poll = setInterval(async () => {
+        attempts++;
+        await onRefresh();
+        if (attempts > 60) clearInterval(poll); // 60s max
+      }, 1500);
+    } catch (err) {
+      addToast('error', err.message || 'Could not start generation');
+      setGenerating(false);
+    }
+  }
+
   // ── Status badge label ───────────────────────────────────────────────────
 
   const statusLabel = isGenerating ? 'generating…' : draft.status;
+  const isFailed = draft.generationStatus === 'failed' || (!draft.body && !isGenerating);
+  const canGenerate = isFailed && draft.status !== 'sent' && draft.status !== 'rejected';
 
   return (
     <>
@@ -146,6 +168,28 @@ export default function DraftCard({ draft, onRefresh }) {
                   : draft.sourceBody}
               </div>
             )}
+          </div>
+        )}
+
+        {/* Generate button — shown when generation failed or body is empty */}
+        {canGenerate && (
+          <div style={{ margin: '8px 0' }}>
+            <button
+              type="button"
+              className="btn btn-primary btn-sm"
+              onClick={handleGenerate}
+              disabled={generating}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+            >
+              {generating ? <Spinner size={12} /> : (
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2a10 10 0 1 0 10 10"/>
+                  <path d="M22 2 12 12"/>
+                  <path d="m17 2 5 5-5 5"/>
+                </svg>
+              )}
+              {generating ? 'Generating…' : 'Generate with AI'}
+            </button>
           </div>
         )}
 
@@ -242,6 +286,22 @@ export default function DraftCard({ draft, onRefresh }) {
                   }}
                 >
                   Edit
+                </button>
+                <button
+                  className="btn btn-ghost btn-sm"
+                  onClick={handleGenerate}
+                  disabled={generating}
+                  title="Re-generate with AI"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}
+                >
+                  {generating ? <Spinner size={11} /> : (
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="1 4 1 10 7 10"/>
+                      <polyline points="23 20 23 14 17 14"/>
+                      <path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/>
+                    </svg>
+                  )}
+                  {generating ? 'Generating…' : 'Regenerate'}
                 </button>
                 <button
                   className="btn btn-danger btn-sm"
