@@ -181,8 +181,11 @@ app.get('/crm/auth/login', (req, res) => {
 });
 
 app.get('/crm/auth/callback', async (req, res) => {
-  const { code, state, error } = req.query;
-  if (error)  return res.redirect(`/crm-login.html?error=${encodeURIComponent(error)}`);
+  const { code, state, error, error_description } = req.query;
+  if (error) {
+    console.error('[auth] Microsoft OAuth error:', error, '|', error_description);
+    return res.redirect(`/crm-login.html?error=${encodeURIComponent(error_description || error)}`);
+  }
   if (!code || state !== req.session.oauthState) return res.redirect('/crm-login.html?error=invalid_state');
 
   try {
