@@ -931,47 +931,61 @@ app.get('/api/crm/stream', requireAuth, (req, res) => {
 });
 
 // ── Manual sync trigger (button click) ───────────────────────────────────────
-app.post('/api/crm/trigger-sync', requireAuth, async (req, res) => {
-  const ue = req.session.userEmail;
+async function doManualSync(ue, req) {
+  const token = await getValidToken(req);
+  if (!token) throw Object.assign(new Error('Not connected to Outlook — please sign in again'), { code: 401, redirect: '/crm/auth/login' });
+
+  // Persist refreshed token so background worker can reuse it
+  if (req.session.refreshToken) {
+    await syncWorker.saveTokens(ue, {
+      accessToken:  token,
+      refreshToken: req.session.refreshToken,
+      expiresAt:    Date.now() + 55 * 60 * 1000,
+    });
+  }
+
+  const { rows: customers }    = await pool.query('SELECT email, name FROM crm_customers WHERE user_email=$1', [ue]);
+  const { rows: existingRows } = await pool.query('SELECT outlook_id FROM crm_emails WHERE user_email=$1 AND outlook_id IS NOT NULL', [ue]);
+  const existingIds = new Set(existingRows.map(r => r.outlook_id));
+  const customerMap = new Map(customers.map(c => [c.email.toLowerCase(), c]));
+
+  // Fetch sync timestamps; if no external customers yet, reset to force full history scan
+  const { rows: stored } = await pool.query('SELECT last_inbox_sync, last_sent_sync FROM crm_tokens WHERE user_email=$1', [ue]);
+  const s = stored[0] || {};
+  const excludedDomains = new Set((process.env.EXCLUDED_DOMAINS || 'artechsolution.co.in').toLowerCase().split(',').map(d => d.trim()));
+  const externalCustomers = customers.filter(c => { const d = (c.email || '').split('@')[1] || ''; return !excludedDomains.has(d); });
+  // If no external customers synced yet, ignore last_sync so we get full history
+  const lastInbox = externalCustomers.length === 0 ? null : s.last_inbox_sync;
+  const lastSent  = externalCustomers.length === 0 ? null : s.last_sent_sync;
+
+  const inboxCount = await syncFolder(ue, token, 'inbox',     lastInbox, customerMap, existingIds);
+  const sentCount  = await syncFolder(ue, token, 'sentitems', lastSent,  customerMap, existingIds);
+
+  await pool.query(
+    'UPDATE crm_tokens SET last_inbox_sync=$1, last_sent_sync=$2, updated_at=NOW() WHERE user_email=$3',
+    [new Date(), new Date(), ue.toLowerCase()]
+  );
+  return { inbox: inboxCount, sent: sentCount };
+}
+
+app.post('/api/crm/sync', requireAuth, async (req, res) => {
   try {
-    const { rows: customers } = await pool.query(
-      'SELECT email, name FROM crm_customers WHERE user_email=$1', [ue]
-    );
-    if (!customers.length) return res.json({ inbox: 0, sent: 0, message: 'No CRM customers yet' });
+    const result = await doManualSync(req.session.userEmail, req);
+    res.json(result);
+  } catch (e) {
+    console.error('[sync] manual sync error:', e.message);
+    if (e.code === 401) return res.status(401).json({ error: e.message, redirect: e.redirect });
+    res.status(500).json({ error: e.message });
+  }
+});
 
-    const { rows: existingRows } = await pool.query(
-      'SELECT outlook_id FROM crm_emails WHERE user_email=$1 AND outlook_id IS NOT NULL', [ue]
-    );
-    const existingIds = new Set(existingRows.map(r => r.outlook_id));
-    const customerMap = new Map(customers.map(c => [c.email.toLowerCase(), c]));
-
-    const token = await getValidToken(req);
-    if (!token) return res.status(401).json({ error: 'No access token', redirect: '/' });
-
-    // Save/refresh token in crm_tokens so background worker can reuse it
-    if (req.session.refreshToken) {
-      await syncWorker.saveTokens(ue, {
-        accessToken:  token,
-        refreshToken: req.session.refreshToken,
-        expiresAt:    Date.now() + 55 * 60 * 1000,
-      });
-    }
-
-    const { rows: stored } = await pool.query('SELECT last_inbox_sync, last_sent_sync FROM crm_tokens WHERE user_email=$1', [ue]);
-    const s = stored[0] || {};
-
-    const inboxCount = await syncFolder(ue, token, 'inbox',     s.last_inbox_sync, customerMap, existingIds);
-    const sentCount  = await syncFolder(ue, token, 'sentitems', s.last_sent_sync,  customerMap, existingIds);
-
-    const now = new Date();
-    await pool.query(
-      'UPDATE crm_tokens SET last_inbox_sync=$1, last_sent_sync=$2, updated_at=NOW() WHERE user_email=$3',
-      [now, now, ue.toLowerCase()]
-    );
-
-    res.json({ inbox: inboxCount, sent: sentCount });
+app.post('/api/crm/trigger-sync', requireAuth, async (req, res) => {
+  try {
+    const result = await doManualSync(req.session.userEmail, req);
+    res.json(result);
   } catch (e) {
     console.error('trigger-sync error:', e.message);
+    if (e.code === 401) return res.status(401).json({ error: e.message, redirect: e.redirect });
     res.status(500).json({ error: e.message });
   }
 });

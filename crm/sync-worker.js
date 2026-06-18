@@ -305,7 +305,6 @@ async function syncUser(userEmail, msConfig) {
     const { rows: customers } = await query(
       'SELECT email, name FROM crm_customers WHERE user_email=$1', [userEmail]
     );
-    if (!customers.length) return;
     const customerMap = new Map(customers.map(c => [c.email.toLowerCase(), c]));
 
     const { rows: existing } = await query(
@@ -313,8 +312,13 @@ async function syncUser(userEmail, msConfig) {
     );
     const existingIds = new Set(existing.map(r => r.outlook_id));
 
-    const inboxCount = await syncFolder(userEmail, token, 'inbox',      stored?.last_inbox_sync, customerMap, existingIds);
-    const sentCount  = await syncFolder(userEmail, token, 'sentitems',  stored?.last_sent_sync,  customerMap, existingIds);
+    // If no external customers yet, force a full history scan to discover them
+    const externalCount = customers.filter(c => { const d = (c.email || '').split('@')[1] || ''; return !EXCLUDED_DOMAINS.has(d); }).length;
+    const lastInbox = externalCount === 0 ? null : stored?.last_inbox_sync;
+    const lastSent  = externalCount === 0 ? null : stored?.last_sent_sync;
+
+    const inboxCount = await syncFolder(userEmail, token, 'inbox',      lastInbox, customerMap, existingIds);
+    const sentCount  = await syncFolder(userEmail, token, 'sentitems',  lastSent,  customerMap, existingIds);
 
     const now = new Date();
     await query(
